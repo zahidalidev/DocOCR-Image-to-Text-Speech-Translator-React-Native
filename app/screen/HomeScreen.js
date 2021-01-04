@@ -29,17 +29,9 @@ class HomeScreen extends Component {
         const { modalVisible, cameraModelVisible } = this.state;
         return (
             <View style={styles.mainContainer}>
-
-                {/* Status Bar */}
-                <StatusBar barStyle="light-content" backgroundColor={colors.primary} />
-
                 <SafeAreaView style={styles.safeContainer} >
-
                     {/* App Bar */}
-                    <View>
-                        <AppBar navigation={this.props.navigation} />
-                    </View>
-
+                    <AppBar showSearchBar={true} navigation={this.props.navigation} />
 
                     {/* bottom circle btton*/}
                     <View style={styles.bottomBarContainer} >
@@ -73,7 +65,10 @@ class HomeScreen extends Component {
                                     <View style={styles.circleContainerLeft} >
                                         <TouchableOpacity
                                             style={[styles.circleButtonSmall, styles.shadowEffect]}
-                                            onPress={() => this.setModalVisible(false)}
+                                            onPress={() => {
+                                                this.setModalVisible(false)
+                                                this.props.navigation.navigate('TextToVoice')
+                                            }}
                                         >
                                             <IconM name={"volume-high"} size={30} color={colors.secondry} />
                                         </TouchableOpacity>

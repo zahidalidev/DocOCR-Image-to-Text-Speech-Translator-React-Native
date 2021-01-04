@@ -29,6 +29,7 @@ import TranslateScreen from './app/screen/TranslateScreen';
 import CameraScreen from './app/screen/CameraScreen';
 import ResultScreen from './app/screen/ResultScreen';
 import colors from './app/config/colors';
+import TextToVoice from './app/screen/TextToVoice';
 
 const Stack = createDrawerNavigator();
 
@@ -133,6 +134,7 @@ class App extends Component {
             <Stack.Screen name="ResultScreen">{(props) => <ResultScreen {...props} />}</Stack.Screen>
             <Stack.Screen name="ReadTextScreen" options={{ title: "ReadTextScreen" }} component={ReadTextScreen} />
             <Stack.Screen name="TranslateScreen" options={{ title: "TranslateScreen" }} component={TranslateScreen} />
+            <Stack.Screen name="TextToVoice" options={{ title: "TextToVoice" }} component={TextToVoice} />
           </Stack.Navigator>
         </NavigationContainer>
       </>
@@ -140,8 +142,5 @@ class App extends Component {
   }
 };
 
-const styles = StyleSheet.create({
-
-});
 
 export default App;

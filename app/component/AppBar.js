@@ -4,11 +4,12 @@ import { Appbar } from 'react-native-paper';
 import { Searchbar } from 'react-native-paper';
 import Icon from "react-native-vector-icons/FontAwesome";
 import IconM from "react-native-vector-icons/MaterialCommunityIcons";
+import { StatusBar } from 'expo-status-bar';
 
 import AppDrawer from "./AppDrawer";
 import colors from "../config/colors";
 
-const AppBar = ({ navigation }) => {
+const AppBar = ({ navigation, showSearchBar }) => {
 
     const [searchQuery, setSearchQuery] = React.useState('');
     const [showSearch, setShowSearch] = React.useState(false);
@@ -25,16 +26,23 @@ const AppBar = ({ navigation }) => {
     const onChangeSearch = query => setSearchQuery(query);
 
     return (
-        <>
+        <View>
+
+            {/* Status Bar */}
+            <StatusBar barStyle="light-content" backgroundColor={colors.primary} />
+
             {showAppBar && <Appbar.Header style={styles.container} >
                 <Appbar.Action size={30} icon="menu" onPress={handleMenu} />
                 {/* <Icon name={"share-alt"} size={30} color={colors.primary} /> */}
                 <Appbar.Content titleStyle={{ fontSize: 30 }} title="Doc OCR" />
 
-                <Appbar.Action size={30} icon="magnify" onPress={() => {
-                    setShowSearch(true);
-                    setShowAppBar(false)
-                }} />
+                {showSearchBar ?
+                    <Appbar.Action size={30} icon="magnify" onPress={() => {
+                        setShowSearch(true);
+                        setShowAppBar(false)
+                    }} />
+                    : null}
+
                 <Appbar.Action size={30} icon="dots-vertical" onPress={handleMore} />
             </Appbar.Header>}
 
@@ -102,7 +110,7 @@ const AppBar = ({ navigation }) => {
             </View>
 
 
-        </>
+        </View>
     );
 }
 
@@ -135,7 +143,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "flex-end",
         alignItems: "center",
-        marginBottom: 230
+        // marginBottom: 230
     },
     modelShareRateContainer: {
         flex: 1,

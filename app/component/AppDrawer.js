@@ -8,7 +8,7 @@ function AppDrawer({ navigation }) {
 
     return (
         <Drawer.Section  >
-            <View style={{ flexDirection: 'row', padding: 20 }} >
+            <View style={{ flexDirection: 'row', padding: 20, marginTop: 25 }} >
                 <Image style={{ width: 260, height: 50 }} source={require("../assets/navigationIcon.png")} />
             </View>
             <Divider />

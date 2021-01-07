@@ -117,7 +117,7 @@ class App extends Component {
     return (
       <>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Home"
+          <Stack.Navigator initialRouteName="TranslateScreen"
             drawerType={"front"}
             overlayColor="transparent"
             edgeWidth={100}
@@ -133,8 +133,8 @@ class App extends Component {
             {/* <Stack.Screen name="CameraScreen">{(props) => <CameraScreen {...props} />}</Stack.Screen> */}
             <Stack.Screen name="ResultScreen">{(props) => <ResultScreen {...props} />}</Stack.Screen>
             <Stack.Screen name="ReadTextScreen" options={{ title: "ReadTextScreen" }} component={ReadTextScreen} />
-            <Stack.Screen name="TranslateScreen" options={{ title: "TranslateScreen" }} component={TranslateScreen} />
             <Stack.Screen name="TextToVoice" options={{ title: "TextToVoice" }} component={TextToVoice} />
+            <Stack.Screen name="TranslateScreen" options={{ title: "TranslateScreen" }} component={TranslateScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </>

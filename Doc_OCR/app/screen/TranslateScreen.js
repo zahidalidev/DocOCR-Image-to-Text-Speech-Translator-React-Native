@@ -2,6 +2,10 @@ import React from 'react';
 import { Text, View, Button } from 'react-native';
 
 function TranslateScreen({ navigation }) {
+
+
+    // useEffect
+
     return (
         <View>
             <Text>Translate Screen</Text>

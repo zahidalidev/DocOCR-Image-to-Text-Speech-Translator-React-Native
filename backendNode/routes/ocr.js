@@ -16,13 +16,14 @@ var storage = multer.diskStorage({
 
 const upload = multer({ storage })
 
-router.post('/', upload.single('file'), async (req, res) => {
+router.post('/:id', upload.single('file'), async (req, res) => {
     try {
+        const lang = req.params.id
         const createWorker = tessaract.createWorker;
         const worker = createWorker();
         await worker.load();
-        await worker.loadLanguage('eng');
-        await worker.initialize('eng')
+        await worker.loadLanguage(lang);
+        await worker.initialize(lang)
 
         const { data: { text } } = await worker.recognize(req.file.path)
 

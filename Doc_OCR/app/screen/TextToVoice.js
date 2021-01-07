@@ -3,7 +3,7 @@ import { SafeAreaView, TouchableOpacity, Text, TextInput, StyleSheet, View } fro
 import { RFPercentage } from 'react-native-responsive-fontsize';
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import * as Speech from 'expo-speech';
-import translate from 'google-translate-open-api';
+// import translate from 'google-translate-open-api';
 
 import AppBar from '../component/AppBar';
 import colors from '../config/colors';
@@ -21,14 +21,14 @@ function TextToVoice({ navigation }) {
 
         stop ? Speech.stop() : Speech.speak(text, options)
 
-        const lang = await Speech.getAvailableVoicesAsync()
+        const lang = await Speech.getAvailableVoicesAsync() // getting available language on device
         console.log(lang)
-        const result = await translate(`I'm fine.`, {
-            tld: "cn",
-            to: "zh-CN",
-        });
-        const data = result.data[0];
-        console.log(data)
+        // const result = await translate(`I'm fine.`, {
+        //     tld: "cn",
+        //     to: "zh-CN",
+        // });
+        // const data = result.data[0];
+        // console.log(data)
 
     }
 

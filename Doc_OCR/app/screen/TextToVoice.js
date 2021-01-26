@@ -24,26 +24,18 @@ function TextToVoice({ navigation }) {
 
         Speech.speak(text, options)
 
-        // const lang = await Speech.getAvailableVoicesAsync() // getting available language on device
-        // console.log(lang)
-        // const result = await translate(`I'm fine.`, {
-        //     tld: "cn",
-        //     to: "zh-CN",
-        // });
-        // const data = result.data[0];
-        // console.log(data)
-
     }
+
     const stopSpeech = () => {
         Speech.stop()
 
     }
-    const pauseSpeech = () => {
-        Speech.pause()
-    }
-    const resumeSpeech = () => {
-        Speech.resume()
-    }
+    // const pauseSpeech = () => {
+    //     Speech.pause()
+    // }
+    // const resumeSpeech = () => {
+    //     Speech.resume()
+    // }
 
 
     return (

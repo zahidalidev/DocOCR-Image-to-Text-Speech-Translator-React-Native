@@ -4,6 +4,8 @@ import { RFPercentage } from 'react-native-responsive-fontsize';
 import { Ionicons } from "@expo/vector-icons"
 import { Picker } from '@react-native-community/picker';
 import Spinner from 'react-native-loading-spinner-overlay';
+import { MaterialCommunityIcons } from "@expo/vector-icons"
+import * as Speech from 'expo-speech';
 
 import AppBar from '../component/AppBar';
 import colors from '../config/colors';
@@ -71,6 +73,19 @@ function ResultScreen(props) {
     }
 
 
+    const handleTextToVoice = async (stop) => {
+        const options = {
+            language: currentLanguage
+        };
+
+        Speech.speak(translatedText, options)
+
+    }
+
+    const stopSpeech = () => {
+        Speech.stop()
+
+    }
 
     return (
         <View style={styles.mainContainer}>
@@ -145,8 +160,22 @@ function ResultScreen(props) {
                         value={translatedText}
                         onChangeText={(text) => setText(text)}
                     />
+
+                    <View style={{ marginTop: -RFPercentage(4), marginLeft: RFPercentage(1), flexDirection: "row", width: "100%", alignItems: "flex-end", justifyContent: "flex-end" }} >
+                        <TouchableOpacity onPress={() => handleTextToVoice()} style={{ alignItems: "center", justifyContent: "center", borderRadius: RFPercentage(3), padding: RFPercentage(1.3) }} >
+                            <MaterialCommunityIcons name={"volume-high"} size={30} color={colors.primary} />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => stopSpeech()} style={{ alignItems: "center", justifyContent: "center", borderRadius: RFPercentage(3), padding: RFPercentage(1.3) }} >
+                            <MaterialCommunityIcons name={"volume-off"} size={30} color={colors.primary} />
+                        </TouchableOpacity>
+                    </View>
+
                 </View>
                 <View style={{ marginBottom: RFPercentage(2), flexDirection: 'row', marginTop: RFPercentage(4), width: "90%", marginLeft: "5%", alignItems: "center", justifyContent: 'center' }} >
+                    <TouchableOpacity activeOpacity={0.7} onPress={() => props.navigation.navigate('Home')} style={{ marginRight: RFPercentage(2), backgroundColor: "#af3d3d", alignItems: "center", justifyContent: "center", borderRadius: RFPercentage(3), padding: RFPercentage(1.3), paddingLeft: RFPercentage(3), paddingRight: RFPercentage(3) }} >
+                        <Text style={{ fontSize: RFPercentage(2), color: "white" }} >Back</Text>
+                    </TouchableOpacity>
+
                     <TouchableOpacity activeOpacity={0.7} onPress={() => handleTranslation()} style={{ backgroundColor: colors.primary, alignItems: "center", justifyContent: "center", borderRadius: RFPercentage(3), padding: RFPercentage(1.3), paddingLeft: RFPercentage(3), paddingRight: RFPercentage(3) }} >
                         <Text style={{ fontSize: RFPercentage(2), color: "white" }} >Translate</Text>
                     </TouchableOpacity>
@@ -173,7 +202,7 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         marginTop: RFPercentage(4),
         padding: RFPercentage(2),
-        maxHeight: RFPercentage(26)
+        maxHeight: RFPercentage(26),
     },
     textArea: {
         width: "100%",

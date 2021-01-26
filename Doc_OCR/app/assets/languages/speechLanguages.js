@@ -1,5 +1,5 @@
 export default SpeechLangs = [
-    { code: 'auto', name: 'Automatic' },
+    // { code: 'auto', name: 'Automatic' },
     { code: 'af', name: 'Afrikaans' },
     { code: 'sq', name: 'Albanian' },
     { code: 'am', name: 'Amharic' },

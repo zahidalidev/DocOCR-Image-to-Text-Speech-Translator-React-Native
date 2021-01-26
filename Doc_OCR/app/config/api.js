@@ -1,0 +1,1 @@
+export default apiEndPoint = "http://192.168.10.18:5000/api"

@@ -117,7 +117,7 @@ class App extends Component {
     return (
       <>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="TextToVoice"
+          <Stack.Navigator initialRouteName="TranslateScreen"
             drawerType={"front"}
             overlayColor="transparent"
             edgeWidth={100}

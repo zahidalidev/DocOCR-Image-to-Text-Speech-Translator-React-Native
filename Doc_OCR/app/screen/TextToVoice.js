@@ -9,9 +9,7 @@ import AppBar from '../component/AppBar';
 import colors from '../config/colors';
 import SpeechLangs from "../assets/languages/speechLanguages"
 
-const arr = [
-    1
-]
+
 function TextToVoice({ navigation }) {
 
     const [text, setText] = useState('')

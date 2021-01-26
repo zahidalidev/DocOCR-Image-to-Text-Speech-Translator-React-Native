@@ -3,26 +3,31 @@ import { SafeAreaView, TouchableOpacity, Text, TextInput, StyleSheet, View } fro
 import { RFPercentage } from 'react-native-responsive-fontsize';
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import * as Speech from 'expo-speech';
-// import translate from 'google-translate-open-api';
+import { Picker } from '@react-native-community/picker';
 
 import AppBar from '../component/AppBar';
 import colors from '../config/colors';
+import SpeechLangs from "../assets/languages/speechLanguages"
 
+const arr = [
+    1
+]
 function TextToVoice({ navigation }) {
 
     const [text, setText] = useState('')
     const [stop, setStop] = useState(false)
     const [icon, setIcon] = useState()
+    const [currentLanguage, setCurrentLanguage] = useState()
 
     const handleTextToVoice = async (stop) => {
         const options = {
-            // language: 
+            language: currentLanguage
         };
 
-        stop ? Speech.stop() : Speech.speak(text, options)
+        Speech.speak(text, options)
 
-        const lang = await Speech.getAvailableVoicesAsync() // getting available language on device
-        console.log(lang)
+        // const lang = await Speech.getAvailableVoicesAsync() // getting available language on device
+        // console.log(lang)
         // const result = await translate(`I'm fine.`, {
         //     tld: "cn",
         //     to: "zh-CN",
@@ -31,6 +36,17 @@ function TextToVoice({ navigation }) {
         // console.log(data)
 
     }
+    const stopSpeech = () => {
+        Speech.stop()
+
+    }
+    const pauseSpeech = () => {
+        Speech.pause()
+    }
+    const resumeSpeech = () => {
+        Speech.resume()
+    }
+
 
     return (
         <View style={styles.mainContainer}>
@@ -43,13 +59,34 @@ function TextToVoice({ navigation }) {
                 </Text>
             </View>
 
+            <View style={{ flexDirection: "row", marginTop: RFPercentage(4), width: "90%", marginLeft: "10%", alignItems: "center" }} >
+                <View style={{ width: "45%", alignItems: "flex-start", justifyContent: "flex-start" }} >
+                    <Text numberOfLines={1} style={{ fontSize: RFPercentage(3), fontWeight: "bold", color: colors.primary }} >
+                        Select Language
+                    </Text>
+                </View>
+                <View style={{ width: "55%", alignItems: "flex-start", justifyContent: "flex-start" }} >
+                    <Picker
+                        selectedValue={currentLanguage}
+                        style={{ height: 50, width: RFPercentage(20) }}
+                        onValueChange={(itemValue, itemIndex) =>
+                            setCurrentLanguage(itemValue)
+                        }
+                    >
+                        {SpeechLangs.map((lang, i) => (
+                            <Picker.Item key={i} label={lang.name} value={lang.code} />
+                        ))}
+                    </Picker>
+                </View>
+            </View>
+
             <View style={styles.textAreaContainer} >
                 <TextInput
                     style={styles.textArea}
                     underlineColorAndroid="transparent"
                     placeholder="Type something"
                     placeholderTextColor="grey"
-                    numberOfLines={28}
+                    numberOfLines={25}
                     multiline={true}
                     textAlignVertical="top"
                     textAlign="left"
@@ -57,12 +94,18 @@ function TextToVoice({ navigation }) {
                 />
             </View>
             <View style={{ flexDirection: 'row', marginTop: RFPercentage(4), width: "90%", marginLeft: "5%", alignItems: "center", justifyContent: 'center' }} >
-                <TouchableOpacity onPress={() => handleTextToVoice(false)} style={{ borderBottomColor: colors.primary, borderBottomWidth: 1, alignItems: "center", justifyContent: "center", borderRadius: RFPercentage(3), elevation: 2, padding: RFPercentage(1.3), backgroundColor: "#edeeef", width: "30%" }} >
-                    <MaterialCommunityIcons name={"volume-high"} size={30} color={colors.primary} />
+                <TouchableOpacity onPress={() => handleTextToVoice()} style={{ alignItems: "center", justifyContent: "center", borderRadius: RFPercentage(3), padding: RFPercentage(1.3) }} >
+                    <MaterialCommunityIcons name={"volume-high"} size={35} color={colors.primary} />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => handleTextToVoice(true)} style={{ marginLeft: RFPercentage(2), borderBottomColor: colors.primary, borderBottomWidth: 1, alignItems: "center", justifyContent: "center", borderRadius: RFPercentage(3), elevation: 2, padding: RFPercentage(1.3), backgroundColor: "#edeeef", width: "30%" }} >
-                    <MaterialCommunityIcons name={"volume-off"} size={30} color={colors.primary} />
+                <TouchableOpacity onPress={() => stopSpeech()} style={{ marginLeft: RFPercentage(2), alignItems: "center", justifyContent: "center", borderRadius: RFPercentage(3), padding: RFPercentage(1.3) }} >
+                    <MaterialCommunityIcons name={"volume-off"} size={35} color={colors.primary} />
                 </TouchableOpacity>
+                {/* <TouchableOpacity onPress={() => pauseSpeech()} style={{ marginLeft: RFPercentage(2), alignItems: "center", justifyContent: "center", borderRadius: RFPercentage(3), padding: RFPercentage(1.3) }} >
+                    <MaterialCommunityIcons name={"pause-circle"} size={30} color={colors.primary} />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => resumeSpeech()} style={{ marginLeft: RFPercentage(2), alignItems: "center", justifyContent: "center", borderRadius: RFPercentage(3), padding: RFPercentage(1.3) }} >
+                    <MaterialCommunityIcons name={"play-circle"} size={30} color={colors.primary} />
+                </TouchableOpacity> */}
             </View>
 
         </View>

@@ -24,7 +24,6 @@ import * as Permissions from 'expo-permissions';
 
 import HomeScreen from './app/screen/HomeScreen';
 import AppDrawer from './app/component/AppDrawer';
-import ReadTextScreen from './app/screen/ReadTextScreen';
 import TranslateScreen from './app/screen/TranslateScreen';
 import CameraScreen from './app/screen/CameraScreen';
 import ResultScreen from './app/screen/ResultScreen';
@@ -68,20 +67,6 @@ class App extends Component {
       this.setState({ image: response })
       navigation.navigate('ResultScreen', { data: response })
 
-
-      // You can also display the image using data:
-      // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-
-      // response['uri'] = response.path;
-      // response['name'] = response.fileName;
-
-      // this.setState({
-      //     avatarSource: source,
-      //     pic: response,
-      //     loading: true
-      // });
-
-      // this.uploadOnCloudinary(response)
     }
   }
 
@@ -117,7 +102,7 @@ class App extends Component {
     return (
       <>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="TranslateScreen"
+          <Stack.Navigator initialRouteName="Home"
             drawerType={"front"}
             overlayColor="transparent"
             edgeWidth={100}
@@ -132,7 +117,6 @@ class App extends Component {
             <Stack.Screen name="Home">{(props) => <HomeScreen {...props} onGetImg={this.getImg} />}</Stack.Screen>
             {/* <Stack.Screen name="CameraScreen">{(props) => <CameraScreen {...props} />}</Stack.Screen> */}
             <Stack.Screen name="ResultScreen">{(props) => <ResultScreen {...props} />}</Stack.Screen>
-            <Stack.Screen name="ReadTextScreen" options={{ title: "ReadTextScreen" }} component={ReadTextScreen} />
             <Stack.Screen name="TextToVoice" options={{ title: "TextToVoice" }} component={TextToVoice} />
             <Stack.Screen name="TranslateScreen" options={{ title: "TranslateScreen" }} component={TranslateScreen} />
           </Stack.Navigator>

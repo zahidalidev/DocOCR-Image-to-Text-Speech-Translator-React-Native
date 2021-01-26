@@ -1,4 +1,4 @@
-export default tesseractLangs = [
+export default TesseractLangs = [
     { code: 'afr', name: 'Afrikaans' },
     { code: 'amh', name: 'Amharic' },
     { code: 'ara', name: 'Arabic' },

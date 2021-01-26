@@ -18,16 +18,13 @@ function ResultScreen(props) {
     const [currentLanguage, setCurrentLanguage] = useState()
     const [image, setImage] = useState({ uri: '' })
     const [loading, setLoading] = useState(false);
-    // const [count, setCount] = useState(1)
 
     useEffect(() => {
         async function fetchData() {
             let latestImage = props.route.params.data;
-
-            // let count = props.route.params.count;
+            let lang = props.route.params.lang;
 
             if (latestImage.uri != image.uri) {
-                console.log('new image')
                 setImage(latestImage)
 
                 let data = new FormData();
@@ -35,17 +32,13 @@ function ResultScreen(props) {
 
                 try {
                     setLoading(true);
-                    const { data: text } = await scanText(data, 'eng')
+                    const { data: text } = await scanText(data, lang)
                     setText(text);
-                    // console.log(text)
-                    // if (text) {
-                    setLoading(false);
-                    // }
-                    // count = 2;
 
+                    setLoading(false);
                 } catch (error) {
                     setLoading(false);
-                    console.log("hi", error)
+                    console.log("Error: ", error)
                 }
             }
 
@@ -61,9 +54,12 @@ function ResultScreen(props) {
         };
 
         try {
+            setLoading(true);
             const { data } = await getTranslatedText(body)
+            setLoading(false);
             setTranslatedText(data)
         } catch (error) {
+            setLoading(false);
             console.log("error: ", error)
         }
     }
@@ -80,21 +76,13 @@ function ResultScreen(props) {
         <View style={styles.mainContainer}>
             <AppBar showSearchBar={false} navigation={props.navigation} />
             {/* App Bar */}
-            {/* 
-            <View style={styles.container}>
-                <Image style={{ width: 200, height: 350 }} source={image} />
-                <Text>Result Screen</Text>
-            </View> */}
+
 
             <Spinner
-                color={colors.secondry}
-                //visibility of Overlay Loading Spinner
+                color={colors.primary}
                 visible={loading}
-                //Text with the Spinner
-                textContent={'Scanning...'}
-                textStyle={{ color: colors.secondry, marginTop: -RFPercentage(5) }}
-            //Text style of the Spinner Text
-
+                textContent={'Loading...'}
+                textStyle={{ color: colors.primary, marginTop: -RFPercentage(5) }}
             />
 
             <ScrollView>
@@ -102,8 +90,8 @@ function ResultScreen(props) {
 
                 <View style={{ marginTop: RFPercentage(4), width: "90%", marginLeft: "5%", alignItems: "center" }} >
                     <Text style={{ fontSize: RFPercentage(4), fontWeight: "bold", color: colors.primary }} >
-                        Translator
-                </Text>
+                        Scanned Text
+                    </Text>
                 </View>
                 <View style={styles.textAreaContainer} >
                     <TextInput
@@ -184,7 +172,8 @@ const styles = StyleSheet.create({
         borderColor: colors.lightGray,
         borderWidth: 2,
         marginTop: RFPercentage(4),
-        padding: RFPercentage(2)
+        padding: RFPercentage(2),
+        maxHeight: RFPercentage(26)
     },
     textArea: {
         width: "100%",

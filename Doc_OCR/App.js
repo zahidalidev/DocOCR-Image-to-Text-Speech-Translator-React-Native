@@ -65,7 +65,7 @@ class App extends Component {
     else {
       // let source = { uri: response.uri };
       this.setState({ image: response })
-      navigation.navigate('ResultScreen', { data: response })
+      navigation.navigate('CameraScreen', { data: response })
 
     }
   }
@@ -115,7 +115,7 @@ class App extends Component {
 
             {/* Two Method to navigate to components */}
             <Stack.Screen name="Home">{(props) => <HomeScreen {...props} onGetImg={this.getImg} />}</Stack.Screen>
-            {/* <Stack.Screen name="CameraScreen">{(props) => <CameraScreen {...props} />}</Stack.Screen> */}
+            <Stack.Screen name="CameraScreen">{(props) => <CameraScreen {...props} />}</Stack.Screen>
             <Stack.Screen name="ResultScreen">{(props) => <ResultScreen {...props} />}</Stack.Screen>
             <Stack.Screen name="TextToVoice" options={{ title: "TextToVoice" }} component={TextToVoice} />
             <Stack.Screen name="TranslateScreen" options={{ title: "TranslateScreen" }} component={TranslateScreen} />

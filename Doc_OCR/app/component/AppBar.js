@@ -29,7 +29,7 @@ const AppBar = ({ navigation, showSearchBar }) => {
         <View>
 
             {/* Status Bar */}
-            <StatusBar barStyle="light-content" backgroundColor={colors.primary} />
+            <StatusBar style="light" backgroundColor={colors.primary} />
 
             {showAppBar && <Appbar.Header style={styles.container} >
                 <Appbar.Action size={30} icon="menu" onPress={handleMenu} />

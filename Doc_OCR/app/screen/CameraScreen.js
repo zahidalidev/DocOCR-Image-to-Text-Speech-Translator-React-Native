@@ -1,129 +1,76 @@
-import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Platform, } from 'react-native';
-import { Camera } from 'expo-camera';
-import * as Permissions from 'expo-permissions';
-import { FontAwesome, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
-import * as ImagePicker from 'expo-image-picker';
+import React, { useEffect, useState } from 'react';
+import { TouchableOpacity, Text, TextInput, StyleSheet, View, Image, ScrollView } from 'react-native';
+import { Picker } from '@react-native-community/picker';
+import { RFPercentage } from 'react-native-responsive-fontsize';
 
+import TesseractLangs from "../assets/languages/tessRactLanguages"
+import AppBar from '../component/AppBar';
+import colors from '../config/colors';
 
+function CameraScreen(props) {
+    const [image, setImage] = useState(null)
+    const [currentLanguage, setCurrentLanguage] = useState()
 
+    useEffect(() => {
+        let latestImage = props.route.params.data;
+        setImage(latestImage)
+    })
 
-export default class CameraScreen extends React.Component {
-    state = {
-        hasPermission: null,
-        cameraType: Camera.Constants.Type.back,
+    const proceedToTranslate = () => {
+        props.navigation.navigate('ResultScreen', { data: image, lang: currentLanguage })
     }
 
-    async componentDidMount() {
-        this.getPermissionAsync()
-        if (this.camera) {
-            // const options = { quality: 1, base64: true };
-            const options = {
-                quality: 1, onPictureSaved: () => {
-                    console.log("taked")
-                }
-            };
-            let photo = await this.camera.takePictureAsync(options);
-            this.props.navigation.navigate('ResultScreen', { data: photo })
+    return (
+        <View style={styles.mainContainer}>
 
-        }
-    }
+            {/* App Bar */}
+            <AppBar showSearchBar={false} navigation={props.navigation} />
 
-    getPermissionAsync = async () => {
-        // Camera roll Permission 
-        if (Platform.OS === 'ios') {
-            const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-            if (status !== 'granted') {
-                alert('Sorry, we need camera roll permissions to make this work!');
-            }
-        }
-        // Camera Permission
-        const { status } = await Permissions.askAsync(Permissions.CAMERA);
-        this.setState({ hasPermission: status === 'granted' });
-    }
+            <View style={{ flex: 1, width: "90%", marginLeft: "5%" }} >
 
-    handleCameraType = () => {
-        const { cameraType } = this.state
-
-        this.setState({
-            cameraType:
-                cameraType === Camera.Constants.Type.back
-                    ? Camera.Constants.Type.front
-                    : Camera.Constants.Type.back
-        })
-    }
-
-    takePicture = async () => {
-
-        if (this.camera) {
-            // const options = { quality: 1, base64: true };
-            let photo = await this.camera.takePictureAsync();
-            this.props.navigation.navigate('ResultScreen', { data: photo })
-
-        }
-    }
-
-    pickImage = async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images
-        });
-    }
-
-
-    render() {
-        const { hasPermission } = this.state
-        if (hasPermission === null) {
-            return <View />;
-        } else if (hasPermission === false) {
-            return <Text>No access to camera</Text>;
-        } else {
-            return (
-                <View style={{ flex: 1 }}>
-                    <Camera style={{ flex: 1 }} type={this.state.cameraType} ref={ref => { this.camera = ref }}>
-                        <View style={{ flex: 1, flexDirection: "row", justifyContent: "space-between", margin: 30 }}>
-                            <TouchableOpacity
-                                style={{
-                                    alignSelf: 'flex-end',
-                                    alignItems: 'center',
-                                    backgroundColor: 'transparent'
-                                }}
-                                onPress={() => this.pickImage()}>
-                                <Ionicons
-                                    name="ios-photos"
-                                    style={{ color: "#fff", fontSize: 40 }}
-                                />
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                style={{
-                                    alignSelf: 'flex-end',
-                                    alignItems: 'center',
-                                    backgroundColor: 'transparent',
-                                }}
-                                onPress={() => this.takePicture()}
-                            >
-                                <FontAwesome
-                                    name="camera"
-                                    style={{ color: "#fff", fontSize: 40 }}
-                                />
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                style={{
-                                    alignSelf: 'flex-end',
-                                    alignItems: 'center',
-                                    backgroundColor: 'transparent',
-                                }}
-                                onPress={() => this.handleCameraType()}
-                            >
-                                <MaterialCommunityIcons
-                                    name="camera-switch"
-                                    style={{ color: "#fff", fontSize: 40 }}
-                                />
-                            </TouchableOpacity>
-                        </View>
-                    </Camera>
+                <View style={{ width: "100%", marginTop: RFPercentage(5) }}>
+                    <Image resizeMode="stretch" style={{ width: "99%", height: RFPercentage(60) }} source={image} />
                 </View>
-            );
-        }
-    }
 
+                <View style={{ marginBottom: -RFPercentage(2), flex: 1, flexDirection: "row", marginTop: RFPercentage(5), width: "90%", marginLeft: "10%", alignItems: "flex-start" }} >
+                    <View style={{ marginTop: RFPercentage(1), width: "50%", alignItems: "flex-start", justifyContent: "flex-start" }} >
+                        <Text numberOfLines={1} style={{ fontSize: RFPercentage(3), fontWeight: "bold", color: colors.primary }} >
+                            Select Language
+                    </Text>
+                    </View>
+                    <View style={{ width: "50%", alignItems: "flex-start", justifyContent: "flex-start" }} >
+                        <Picker
+                            selectedValue={currentLanguage}
+                            style={{ height: 50, width: RFPercentage(20) }}
+                            onValueChange={(itemValue, itemIndex) =>
+                                setCurrentLanguage(itemValue)
+                            }
+                        >
+                            {TesseractLangs.map((lang, i) => (
+                                <Picker.Item key={i} label={lang.name} value={lang.code} />
+                            ))}
+                        </Picker>
+                    </View>
+                </View>
+
+                <View style={{ flex: 1, flexDirection: 'row', width: "90%", marginLeft: "5%", alignItems: "flex-start", justifyContent: 'center' }} >
+                    <TouchableOpacity activeOpacity={0.7} onPress={() => props.navigation.navigate('Home')} style={{ marginRight: RFPercentage(2), backgroundColor: "#af3d3d", alignItems: "center", justifyContent: "center", borderRadius: RFPercentage(3), padding: RFPercentage(1.3), paddingLeft: RFPercentage(3), paddingRight: RFPercentage(3) }} >
+                        <Text style={{ fontSize: RFPercentage(2), color: "white" }} >Cancel</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity activeOpacity={0.7} onPress={() => proceedToTranslate()} style={{ backgroundColor: colors.primary, alignItems: "center", justifyContent: "center", borderRadius: RFPercentage(3), padding: RFPercentage(1.3), paddingLeft: RFPercentage(3), paddingRight: RFPercentage(3) }} >
+                        <Text style={{ fontSize: RFPercentage(2), color: "white" }} >Translate</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        </View>
+    );
 }
+
+const styles = StyleSheet.create({
+    mainContainer: {
+        flex: 1,
+        width: "100%"
+    },
+})
+
+export default CameraScreen;

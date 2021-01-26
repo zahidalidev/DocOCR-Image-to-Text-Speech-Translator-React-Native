@@ -21,9 +21,14 @@ router.post('/:id', upload.single('file'), async (req, res) => {
         const lang = req.params.id
         const createWorker = tessaract.createWorker;
         const worker = createWorker();
+        // const worker = createWorker({
+        //     logger: m => console.log(m),
+        // });
+
         await worker.load();
         await worker.loadLanguage(lang);
         await worker.initialize(lang)
+
 
         const { data: { text } } = await worker.recognize(req.file.path)
 

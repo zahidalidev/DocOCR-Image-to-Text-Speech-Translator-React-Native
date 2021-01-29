@@ -2,22 +2,46 @@ import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, Text, TextInput, StyleSheet, View, Image, ScrollView } from 'react-native';
 import { Picker } from '@react-native-community/picker';
 import { RFPercentage } from 'react-native-responsive-fontsize';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 import TesseractLangs from "../assets/languages/tessRactLanguages"
 import AppBar from '../component/AppBar';
 import colors from '../config/colors';
+import { scanText } from '../http/api/api';
 
 function CameraScreen(props) {
-    const [image, setImage] = useState(null)
+    const [image, setImage] = useState({ uri: null })
     const [currentLanguage, setCurrentLanguage] = useState()
+    const [loading, setLoading] = useState(false);
+    const [count, setCount] = useState(1);
 
     useEffect(() => {
         let latestImage = props.route.params.data;
-        setImage(latestImage)
+
+        if (latestImage.uri !== image.uri) {
+            setImage(latestImage)
+        }
+
     })
 
-    const proceedToTranslate = () => {
-        props.navigation.navigate('ResultScreen', { data: image, lang: currentLanguage })
+    const proceedToTranslate = async () => {
+        setCount(count + 1)
+
+        let data = new FormData();
+        data.append('file', { uri: image.uri, name: 'file', type: "image/jpg" });
+        try {
+            setLoading(true);
+            const { data: text } = await scanText(data, currentLanguage)
+            setLoading(false);
+            props.navigation.navigate('ResultScreen', { data: text, count: count })
+
+
+        } catch (error) {
+            setLoading(false);
+            console.log("Error: ", error)
+        }
+
+
     }
 
     return (
@@ -27,6 +51,13 @@ function CameraScreen(props) {
             <AppBar showSearchBar={false} navigation={props.navigation} />
 
             <View style={{ flex: 1, width: "90%", marginLeft: "5%" }} >
+
+                <Spinner
+                    color={colors.primary}
+                    visible={loading}
+                    textContent={'Loading...'}
+                    textStyle={{ color: colors.primary, marginTop: -RFPercentage(5) }}
+                />
 
                 <View style={{ width: "100%", marginTop: RFPercentage(5) }}>
                     <Image resizeMode="stretch" style={{ width: "99%", height: RFPercentage(60) }} source={image} />

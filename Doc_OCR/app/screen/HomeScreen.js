@@ -9,6 +9,9 @@ import { SafeAreaView, StyleSheet, StatusBar, View, Text, TouchableOpacity, Moda
 
 import AppBar from '../component/AppBar';
 import colors from '../config/colors';
+import History from './History';
+import { ScrollView } from 'react-native';
+import { RFPercentage } from 'react-native-responsive-fontsize';
 
 
 class HomeScreen extends Component {
@@ -32,6 +35,10 @@ class HomeScreen extends Component {
                 <SafeAreaView style={styles.safeContainer} >
                     {/* App Bar */}
                     <AppBar showSearchBar={true} navigation={this.props.navigation} />
+
+                    <ScrollView>
+                        <History />
+                    </ScrollView>
 
                     {/* bottom circle btton*/}
                     <View style={styles.bottomBarContainer} >
@@ -183,7 +190,8 @@ const styles = StyleSheet.create({
         flex: 3,
         flexDirection: 'column-reverse',
         alignItems: 'center',
-        marginBottom: 40
+        marginBottom: RFPercentage(5),
+        minHeight: RFPercentage(10)
     },
 
     circleContainer: {

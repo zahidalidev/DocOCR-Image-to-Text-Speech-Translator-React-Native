@@ -9,7 +9,7 @@ import AppBar from '../component/AppBar';
 import colors from '../config/colors';
 import { scanText } from '../http/api/api';
 
-function CameraScreen(props) {
+function OCRScreen(props) {
     const [image, setImage] = useState({ uri: null })
     const [currentLanguage, setCurrentLanguage] = useState()
     const [loading, setLoading] = useState(false);
@@ -104,4 +104,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default CameraScreen;
+export default OCRScreen;

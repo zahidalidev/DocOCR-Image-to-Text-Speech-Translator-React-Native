@@ -25,7 +25,7 @@ import * as Permissions from 'expo-permissions';
 import HomeScreen from './app/screen/HomeScreen';
 import AppDrawer from './app/component/AppDrawer';
 import TranslateScreen from './app/screen/TranslateScreen';
-import CameraScreen from './app/screen/CameraScreen';
+import OCRScreen from './app/screen/OCRScreen';
 import ResultScreen from './app/screen/ResultScreen';
 import colors from './app/config/colors';
 import TextToVoice from './app/screen/TextToVoice';
@@ -65,7 +65,7 @@ class App extends Component {
     else {
       // let source = { uri: response.uri };
       this.setState({ image: response })
-      navigation.navigate('CameraScreen', { data: response })
+      navigation.navigate('OCRScreen', { data: response })
 
     }
   }
@@ -115,7 +115,7 @@ class App extends Component {
 
             {/* Two Method to navigate to components */}
             <Stack.Screen name="Home">{(props) => <HomeScreen {...props} onGetImg={this.getImg} />}</Stack.Screen>
-            <Stack.Screen name="CameraScreen">{(props) => <CameraScreen {...props} />}</Stack.Screen>
+            <Stack.Screen name="OCRScreen">{(props) => <OCRScreen {...props} />}</Stack.Screen>
             <Stack.Screen name="ResultScreen">{(props) => <ResultScreen {...props} />}</Stack.Screen>
             <Stack.Screen name="TextToVoice" options={{ title: "TextToVoice" }} component={TextToVoice} />
             <Stack.Screen name="TranslateScreen" options={{ title: "TranslateScreen" }} component={TranslateScreen} />

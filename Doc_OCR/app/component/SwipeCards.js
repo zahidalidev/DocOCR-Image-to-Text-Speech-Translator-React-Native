@@ -9,9 +9,7 @@ import colors from '../config/colors';
 import { TouchableOpacity } from 'react-native';
 
 class Card extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+
 
     render() {
         return (
@@ -36,29 +34,13 @@ class Card extends React.Component {
     }
 }
 
-class NoMoreCards extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <View>
-                <Text style={styles.noMoreCardsText}>No more cards</Text>
-            </View>
-        )
-    }
-}
 
 export default class extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             cards: [
-                { text: 'Tomato', backgroundColor: 'red' },
-                { text: 'red', backgroundColor: 'green' },
-                { text: 'black', backgroundColor: 'blue' },
-                { text: 'green', backgroundColor: 'yellow' },
+                { text: 'Tomato', backgroundColor: 'red' }
             ]
         };
     }
@@ -69,21 +51,15 @@ export default class extends React.Component {
     handleNope(card) {
         console.log(`Nope for ${card.text}`)
     }
-    handleMaybe(card) {
-        console.log(`Maybe for ${card.text}`)
-    }
 
     render() {
         return (
             <SwipeCards
                 cards={this.state.cards}
                 renderCard={(cardData) => <Card {...cardData} />}
-                renderNoMoreCards={() => <NoMoreCards />}
-                loop={false}
+                loop={true}
                 handleYup={this.handleYup}
                 handleNope={this.handleNope}
-                // handleMaybe={this.handleMaybe}
-                hasMaybeAction
             />
         )
     }

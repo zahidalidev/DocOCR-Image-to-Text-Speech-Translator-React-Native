@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native';
 import { StyleSheet, View, Text } from 'react-native';
@@ -11,6 +11,8 @@ import colors from '../config/colors';
 import SwipeCards from '../component/SwipeCards';
 
 function History(props) {
+
+    const [data, setData] = useState([])
 
     const saveFile = async () => {
         const { status } = await Permissions.askAsync(Permissions.MEDIA_LIBRARY);
@@ -27,6 +29,10 @@ function History(props) {
             // const asset = await MediaLibrary.createAssetAsync(fileUri)
             // await MediaLibrary.createAlbumAsync("Download", asset, false)
         }
+    }
+
+    const handleHistory = (id) => {
+        console.log(id)
     }
 
     return (

@@ -36,7 +36,7 @@ class HomeScreen extends Component {
                     {/* App Bar */}
                     <AppBar showSearchBar={true} navigation={this.props.navigation} />
 
-                    <ScrollView>
+                    <ScrollView style={{ width: "100%", marginTop: RFPercentage(3) }} >
                         <History />
                     </ScrollView>
 

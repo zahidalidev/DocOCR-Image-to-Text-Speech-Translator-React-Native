@@ -8,6 +8,7 @@ import * as FileSystem from 'expo-file-system';
 import * as Permissions from 'expo-permissions';
 
 import colors from '../config/colors';
+import SwipeCards from '../component/SwipeCards';
 
 function History(props) {
 
@@ -21,6 +22,7 @@ function History(props) {
             let fileResponce = JSON.parse(res)
             console.log(fileResponce.data)
 
+
             // await FileSystem.writeAsStringAsync(fileUri, JSON.stringify({ "data": "zahid", "date": "date" }));
             // const asset = await MediaLibrary.createAssetAsync(fileUri)
             // await MediaLibrary.createAlbumAsync("Download", asset, false)
@@ -28,11 +30,13 @@ function History(props) {
     }
 
     return (
-        <ScrollView >
-            <Text>Zahi </Text>
-            <TouchableOpacity style={{ width: "30%", flex: 1, marginTop: 100, padding: RFPercentage(2), backgroundColor: colors.primary }} onPress={() => saveFile()} >
-                <Text style={{ color: "white" }} >save</Text>
-            </TouchableOpacity>
+        <ScrollView style={{ width: "100%" }} >
+            <View>
+                <SwipeCards style={{ width: "100%", flex: 1 }} />
+            </View>
+            <View >
+                <SwipeCards style={{ width: "100%", flex: 1 }} />
+            </View>
         </ScrollView>
     );
 }

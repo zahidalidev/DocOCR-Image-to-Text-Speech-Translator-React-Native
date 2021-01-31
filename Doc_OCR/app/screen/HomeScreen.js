@@ -12,6 +12,7 @@ import colors from '../config/colors';
 import History from './History';
 import { ScrollView } from 'react-native';
 import { RFPercentage } from 'react-native-responsive-fontsize';
+import { readTextFile } from '../component/SaveFile';
 
 
 class HomeScreen extends Component {
@@ -191,7 +192,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column-reverse',
         alignItems: 'center',
         marginBottom: RFPercentage(5),
-        minHeight: RFPercentage(10)
+        minHeight: RFPercentage(13)
     },
 
     circleContainer: {

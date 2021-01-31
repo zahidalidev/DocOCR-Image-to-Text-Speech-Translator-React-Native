@@ -7,6 +7,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import * as Speech from 'expo-speech';
 
+
 import AppBar from '../component/AppBar';
 import colors from '../config/colors';
 import SpeechLangs from "../assets/languages/speechLanguages"

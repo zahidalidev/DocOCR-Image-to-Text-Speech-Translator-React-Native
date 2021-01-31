@@ -1,1 +1,1 @@
-export default apiEndPoint = "http://192.168.10.7:5000/api"
+export default apiEndPoint = "http://192.168.43.58:5000/api"

@@ -8,6 +8,7 @@ import TesseractLangs from "../assets/languages/tessRactLanguages"
 import AppBar from '../component/AppBar';
 import colors from '../config/colors';
 import { scanText } from '../http/api/api';
+import { saveTextFile } from '../component/SaveFile';
 
 function OCRScreen(props) {
     const [image, setImage] = useState({ uri: null })
@@ -33,6 +34,9 @@ function OCRScreen(props) {
             setLoading(true);
             const { data: text } = await scanText(data, currentLanguage)
             setLoading(false);
+
+            await saveTextFile(text)
+
             props.navigation.navigate('ResultScreen', { data: text, count: count })
 
 

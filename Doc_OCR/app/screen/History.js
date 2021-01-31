@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native';
 import { StyleSheet, View, Text } from 'react-native';
@@ -9,27 +9,20 @@ import * as Permissions from 'expo-permissions';
 
 import colors from '../config/colors';
 import SwipeCards from '../component/SwipeCards';
+import { readTextFile } from '../component/SaveFile';
+import Card from '../component/Card';
 
 function History(props) {
 
     const [data, setData] = useState([])
 
-    const saveFile = async () => {
-        const { status } = await Permissions.askAsync(Permissions.MEDIA_LIBRARY);
+    useEffect(() => {
+        setTimeout(getText = async () => {
+            const data = await readTextFile();
+            setData(data)
+        }, 5000)
+    })
 
-        if (status === "granted") {
-            let fileUri = FileSystem.documentDirectory + "DocOcrHistory.txt";
-
-            let res = await FileSystem.readAsStringAsync(fileUri)
-            let fileResponce = JSON.parse(res)
-            console.log(fileResponce.data)
-
-
-            // await FileSystem.writeAsStringAsync(fileUri, JSON.stringify({ "data": "zahid", "date": "date" }));
-            // const asset = await MediaLibrary.createAssetAsync(fileUri)
-            // await MediaLibrary.createAlbumAsync("Download", asset, false)
-        }
-    }
 
     const handleHistory = (id) => {
         console.log(id)
@@ -37,11 +30,10 @@ function History(props) {
 
     return (
         <ScrollView style={{ width: "100%" }} >
-            <View>
-                <SwipeCards style={{ width: "100%", flex: 1 }} />
-            </View>
-            <View >
-                <SwipeCards style={{ width: "100%", flex: 1 }} />
+            <View style={{ width: "83%", marginLeft: "8%" }} >
+                {data.map((item, i) => (
+                    <Card description={item.data} date={item.date} id={i} />
+                ))}
             </View>
         </ScrollView>
     );

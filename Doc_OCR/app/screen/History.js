@@ -30,9 +30,9 @@ function History(props) {
 
     return (
         <ScrollView style={{ width: "100%" }} >
-            <View style={{ width: "83%", marginLeft: "8%" }} >
+            <View >
                 {data.map((item, i) => (
-                    <Card description={item.data} date={item.date} id={i} />
+                    <Card onPress={handleHistory} description={item.data} date={item.date} id={i} />
                 ))}
             </View>
         </ScrollView>

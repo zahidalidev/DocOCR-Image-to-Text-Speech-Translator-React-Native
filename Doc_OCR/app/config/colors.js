@@ -7,4 +7,5 @@ export default {
     white: "white",
     lightGray: "#dbdbdb",
     mediumLightGray: "#bfbdbd",
+    danger: "#ff5252",
 }

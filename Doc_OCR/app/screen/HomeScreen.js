@@ -191,8 +191,17 @@ const styles = StyleSheet.create({
         flex: 3,
         flexDirection: 'column-reverse',
         alignItems: 'center',
-        marginBottom: RFPercentage(5),
-        minHeight: RFPercentage(13)
+        justifyContent: "center",
+        alignSelf: "center",
+        bottom: RFPercentage(5),
+        position: 'absolute',
+
+
+        // flex: 3,
+        // flexDirection: 'column-reverse',
+        // alignItems: 'center',
+        // marginBottom: RFPercentage(5),
+        // minHeight: RFPercentage(13)
     },
 
     circleContainer: {

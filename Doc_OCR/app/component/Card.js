@@ -32,7 +32,7 @@ function Card({ description, date, id, onPress }) {
 
     const ListItemDeleteAction = () => {
         return (
-            <TouchableWithoutFeedback key={id} onPress={() => onPress(id)} >
+            <TouchableWithoutFeedback key={id + 'i'} onPress={() => onPress(id)} >
                 <View style={styles.container}>
                     <MaterialCommunityIcons name="trash-can" size={RFPercentage(4)} color="#d36969" />
                 </View>

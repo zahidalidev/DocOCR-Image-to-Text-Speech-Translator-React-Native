@@ -35,7 +35,7 @@ class HomeScreen extends Component {
             <View style={styles.mainContainer}>
                 <SafeAreaView style={styles.safeContainer} >
                     {/* App Bar */}
-                    <AppBar showSearchBar={true} navigation={this.props.navigation} />
+                    <AppBar showSearchBar={false} navigation={this.props.navigation} />
 
                     <ScrollView style={{ width: "100%", marginTop: RFPercentage(3) }} >
                         <History />

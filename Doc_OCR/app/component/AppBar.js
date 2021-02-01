@@ -9,6 +9,7 @@ import * as StoreReview from 'expo-store-review';
 
 import AppDrawer from "./AppDrawer";
 import colors from "../config/colors";
+import { RFPercentage } from "react-native-responsive-fontsize";
 
 const AppBar = ({ navigation, showSearchBar }) => {
 
@@ -103,8 +104,8 @@ const AppBar = ({ navigation, showSearchBar }) => {
                                     }}
                                 >
                                     <View style={{ flexDirection: "row", padding: 8 }} >
-                                        <IconM name={"star"} size={30} color={colors.primary} />
-                                        <Text style={{ marginLeft: 20, marginTop: 8 }} >Rate Us</Text>
+                                        <IconM name={"star"} size={RFPercentage(2.7)} color={colors.primary} />
+                                        <Text style={{ marginLeft: 20, marginTop: RFPercentage(0.4) }} >Rate Us</Text>
                                     </View>
                                 </TouchableOpacity>
 
@@ -118,8 +119,8 @@ const AppBar = ({ navigation, showSearchBar }) => {
                                     }}
                                 >
                                     <View style={{ flexDirection: "row", padding: 8 }} >
-                                        <Icon name={"share-alt"} size={30} color={colors.primary} />
-                                        <Text style={{ marginLeft: 20, marginTop: 8 }} >Share</Text>
+                                        <Icon name={"share-alt"} size={RFPercentage(2.7)} color={colors.primary} />
+                                        <Text style={{ marginLeft: 20, marginTop: RFPercentage(0.4) }} >Share</Text>
                                     </View>
                                 </TouchableOpacity>
                                 <Text style={{ color: colors.mediumLightGray, paddingTop: 10 }} >App version 1.0.0</Text>

@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native';
-import { StyleSheet, View, Text } from 'react-native';
-import { RFPercentage } from 'react-native-responsive-fontsize';
-import * as MediaLibrary from 'expo-media-library';
-import * as FileSystem from 'expo-file-system';
-import * as Permissions from 'expo-permissions';
+import { StyleSheet, View } from 'react-native';
+
 
 import colors from '../config/colors';
 import SwipeCards from '../component/SwipeCards';
-import { readTextFile } from '../component/SaveFile';
+import { readTextFile, updateTextFile } from '../component/SaveFile';
 import Card from '../component/Card';
 
 function History(props) {
 
     const [data, setData] = useState([])
+    const [render, setRender] = useState(false)
 
     useEffect(() => {
         setTimeout(getText = async () => {
@@ -24,8 +21,12 @@ function History(props) {
     })
 
 
-    const handleHistory = (id) => {
-        console.log(id)
+    const handleHistory = async (id) => {
+        let oldData = data;
+        oldData.splice(id, 1)
+        setData(oldData)
+        setRender(!render)
+        await updateTextFile(oldData)
     }
 
     return (

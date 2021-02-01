@@ -33,7 +33,7 @@ function AppDrawer({ navigation }) {
                 label="Listen"
                 icon="volume-high"
                 active={active === 'third'}
-                onPress={() => navigation.navigate("ReadTextScreen")}
+                onPress={() => navigation.navigate("TextToVoice")}
 
             />
             <Drawer.Item
@@ -47,13 +47,13 @@ function AppDrawer({ navigation }) {
             <Drawer.Item
                 label="Extras"
             />
-            <Drawer.Item
+            {/* <Drawer.Item
                 label="Privacy Policy"
                 icon="lock"
                 active={active === 'third'}
                 onPress={() => navigation.navigate("TranslateScreen")}
 
-            />
+            /> */}
             <Drawer.Item
                 label="Rate Us"
                 icon="star"

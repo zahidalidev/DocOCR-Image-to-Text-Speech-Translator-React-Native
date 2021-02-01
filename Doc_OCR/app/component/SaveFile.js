@@ -50,3 +50,21 @@ export const readTextFile = async (latestText) => {
         }
     }
 }
+
+
+export const updateTextFile = async (latestText) => {
+    const { status } = await Permissions.askAsync(Permissions.MEDIA_LIBRARY);
+
+    if (status === "granted") {
+        let fileUri = FileSystem.documentDirectory + "DocOcrHistoryNew.txt";
+
+        let info = await FileSystem.getInfoAsync(fileUri)
+
+        if (info.exists) {
+            await FileSystem.deleteAsync(fileUri)  // delete file to update
+        }
+
+        let jsonData = JSON.stringify(latestText)
+        await FileSystem.writeAsStringAsync(fileUri, jsonData);  // writing to file
+    }
+}

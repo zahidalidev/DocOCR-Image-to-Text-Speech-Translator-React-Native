@@ -97,7 +97,10 @@ class HomeScreen extends Component {
                                     <View style={styles.circleContainerRight} >
                                         <TouchableOpacity
                                             style={[styles.circleButtonSmall, styles.shadowEffect]}
-                                            onPress={() => this.setModalVisible(false)}
+                                            onPress={() => {
+                                                this.setModalVisible(false)
+                                                this.props.navigation.navigate('TranslateScreen')
+                                            }}
                                         >
                                             <IconM name={"translate"} size={30} color={colors.secondry} />
                                         </TouchableOpacity>

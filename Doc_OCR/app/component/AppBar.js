@@ -1,10 +1,11 @@
 import * as React from "react";
-import { Modal, StyleSheet, View, TouchableOpacity, Text, TouchableWithoutFeedback } from "react-native";
+import { Modal, StyleSheet, View, TouchableOpacity, Text, TouchableWithoutFeedback, Share } from "react-native";
 import { Appbar } from 'react-native-paper';
 import { Searchbar } from 'react-native-paper';
 import Icon from "react-native-vector-icons/FontAwesome";
 import IconM from "react-native-vector-icons/MaterialCommunityIcons";
 import { StatusBar } from 'expo-status-bar';
+import * as StoreReview from 'expo-store-review';
 
 import AppDrawer from "./AppDrawer";
 import colors from "../config/colors";
@@ -24,6 +25,21 @@ const AppBar = ({ navigation, showSearchBar }) => {
     };
     const handleSearch = () => console.log('Searching');
     const onChangeSearch = query => setSearchQuery(query);
+
+    const shareApp = async () => {
+        await Share.share({
+            message: 'React Native | A framework for building native apps using React',
+        });
+    }
+
+    const rateApp = async () => {
+        const CanRate = await StoreReview.isAvailableAsync();
+        if (CanRate) {
+            const res = StoreReview.requestReview();
+            console.log('res', res, await StoreReview.hasAction())
+        }
+        StoreReview.requestReview();
+    }
 
     return (
         <View>
@@ -81,7 +97,10 @@ const AppBar = ({ navigation, showSearchBar }) => {
                             <View  >
                                 <TouchableOpacity
                                     style={[styles.circleButtonSmall, styles.shadowEffect]}
-                                    onPress={() => setShowCard(false)}
+                                    onPress={() => {
+                                        rateApp()
+                                        setShowCard(false)
+                                    }}
                                 >
                                     <View style={{ flexDirection: "row", padding: 8 }} >
                                         <IconM name={"star"} size={30} color={colors.primary} />
@@ -94,6 +113,7 @@ const AppBar = ({ navigation, showSearchBar }) => {
                                 <TouchableOpacity
                                     style={[styles.circleButtonSmall, styles.shadowEffect]}
                                     onPress={() => {
+                                        shareApp()
                                         setShowCard(false)
                                     }}
                                 >

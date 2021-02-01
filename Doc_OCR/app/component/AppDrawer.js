@@ -1,10 +1,26 @@
 import React from "react";
 import { Text, View } from "native-base";
 import { Button, Divider, Drawer } from "react-native-paper";
-import { Image, StyleSheet } from "react-native";
+import { Image, StyleSheet, Share } from "react-native";
+import * as StoreReview from 'expo-store-review';
 
 function AppDrawer({ navigation }) {
     const [active, setActive] = React.useState('');
+
+    const shareApp = async () => {
+        await Share.share({
+            message: 'React Native | A framework for building native apps using React',
+        });
+    }
+
+    const rateApp = async () => {
+        const CanRate = await StoreReview.isAvailableAsync();
+        if (CanRate) {
+            const res = StoreReview.requestReview();
+            console.log('res', res, await StoreReview.hasAction())
+        }
+        StoreReview.requestReview();
+    }
 
     return (
         <Drawer.Section  >
@@ -58,14 +74,14 @@ function AppDrawer({ navigation }) {
                 label="Rate Us"
                 icon="star"
                 active={active === 'third'}
-                onPress={() => navigation.navigate("TranslateScreen")}
+                onPress={() => rateApp()}
 
             />
             <Drawer.Item
                 label="Share"
                 icon="share"
                 active={active === 'third'}
-                onPress={() => navigation.navigate("TranslateScreen")}
+                onPress={() => shareApp()}
 
             />
         </Drawer.Section>

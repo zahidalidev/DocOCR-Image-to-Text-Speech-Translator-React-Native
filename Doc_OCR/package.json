@@ -42,6 +42,7 @@
     "react-native-screens": "^2.11.0",
     "react-native-splash-screen": "^3.2.0",
     "react-native-swipe-cards": "^0.1.1",
+    "react-native-toast-banner": "^1.0.0",
     "react-native-web": "~0.13.12",
     "react-navigation": "^4.4.2",
     "tsutils": "^3.17.1",

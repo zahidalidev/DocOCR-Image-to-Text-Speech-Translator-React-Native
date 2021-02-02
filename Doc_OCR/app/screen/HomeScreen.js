@@ -6,13 +6,12 @@ import IconE from "react-native-vector-icons/Entypo";
 import { ListItem } from 'native-base';
 import { Divider } from "react-native-paper";
 import { SafeAreaView, StyleSheet, StatusBar, View, Text, TouchableOpacity, Modal, TouchableWithoutFeedback } from 'react-native';
+import { ScrollView } from 'react-native';
+import { RFPercentage } from 'react-native-responsive-fontsize';
 
 import AppBar from '../component/AppBar';
 import colors from '../config/colors';
 import History from './History';
-import { ScrollView } from 'react-native';
-import { RFPercentage } from 'react-native-responsive-fontsize';
-import { readTextFile } from '../component/SaveFile';
 
 
 class HomeScreen extends Component {

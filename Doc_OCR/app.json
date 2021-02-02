@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Doc_OCR",
-    "slug": "Doc_OCR",
-    "version": "1.0.0",
+    "name": "Doc OCR",
+    "slug": "DocOCR",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -24,7 +24,8 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.kiloo.subwaysurf"
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.kiloo.subwaysurf",
+      "package": "com.zahidalidev.DocOCR"
     },
     "web": {
       "favicon": "./assets/favicon.png"

@@ -8,7 +8,7 @@ import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 import { TouchableWithoutFeedback } from 'react-native';
 
-function Card({ description, date, id, onPress }) {
+function Card({ description, date, id, onPress, onHandleHistoryData }) {
     const gradColors = [
         {
             color1: "#81c5f1",
@@ -42,7 +42,7 @@ function Card({ description, date, id, onPress }) {
 
     return (
         <Swipeable key={id} renderRightActions={ListItemDeleteAction} >
-            <View style={{
+            <TouchableOpacity activeOpacity={1} onPress={() => onHandleHistoryData(description)} style={{
                 width: "83%", marginLeft: "8%", borderWidth: 0.7, borderColor: gradColors[index].color1, backgroundColor: "#e2e2e2",
                 marginTop: RFPercentage(2), borderRadius: RFPercentage(3), flex: 1, height: RFPercentage(15)
             }}>
@@ -60,7 +60,7 @@ function Card({ description, date, id, onPress }) {
                         <MaterialCommunityIcons size={RFPercentage(2.8)} name="chevron-left" color="white" />
                     </TouchableOpacity>
                 </LinearGradient>
-            </View>
+            </TouchableOpacity>
         </Swipeable>
     );
 }
@@ -68,9 +68,9 @@ function Card({ description, date, id, onPress }) {
 const styles = StyleSheet.create({
     container: {
         // backgroundColor: "#d36969",
-        width: "16%",
+        width: "10%",
         marginRight: "8%",
-        marginLeft: -RFPercentage(5),
+        // marginLeft: -RFPercentage(5),
         justifyContent: "center",
         alignItems: "center"
     }

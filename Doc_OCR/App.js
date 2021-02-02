@@ -13,14 +13,16 @@ import {
   StyleSheet,
   StatusBar,
 } from 'react-native';
-
-
 import { Provider as PaperProvider } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { useWindowDimensions } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
+import {
+  ToastBannerProvider,
+  ToastBannerPresenter
+} from 'react-native-toast-banner';
 
 import HomeScreen from './app/screen/HomeScreen';
 import AppDrawer from './app/component/AppDrawer';
@@ -37,6 +39,7 @@ class App extends Component {
   state = {
     image: null,
   }
+
 
   getPermissionAsync = async () => {
     // Camera roll Permission 
@@ -100,7 +103,7 @@ class App extends Component {
 
   render() {
     return (
-      <>
+      <ToastBannerProvider>
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Home"
             drawerType={"front"}
@@ -121,7 +124,9 @@ class App extends Component {
             <Stack.Screen name="TranslateScreen" options={{ title: "TranslateScreen" }} component={TranslateScreen} />
           </Stack.Navigator>
         </NavigationContainer>
-      </>
+
+        <ToastBannerPresenter />
+      </ToastBannerProvider>
     );
   }
 };

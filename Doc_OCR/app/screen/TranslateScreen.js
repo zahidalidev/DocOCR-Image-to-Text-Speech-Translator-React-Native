@@ -3,6 +3,7 @@ import { TouchableOpacity, Text, TextInput, StyleSheet, View } from 'react-nativ
 import { RFPercentage } from 'react-native-responsive-fontsize';
 import { Ionicons } from "@expo/vector-icons"
 import { Picker } from '@react-native-community/picker';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 import AppBar from '../component/AppBar';
 import colors from '../config/colors';
@@ -16,6 +17,7 @@ function TranslateScreen({ navigation }) {
     const [text, setText] = useState('')
     const [translatedText, setTranslatedText] = useState('')
     const [currentLanguage, setCurrentLanguage] = useState()
+    const [loading, setLoading] = useState(false);
 
     const handleTranslation = async (stop) => {
         const body = {
@@ -24,7 +26,9 @@ function TranslateScreen({ navigation }) {
         };
 
         try {
+            setLoading(true)
             const { data } = await getTranslatedText(body)
+            setLoading(false)
             setTranslatedText(data)
         } catch (error) {
             console.log("error: ", error)
@@ -41,8 +45,15 @@ function TranslateScreen({ navigation }) {
 
     return (
         <View style={styles.mainContainer}>
-            <AppBar showSearchBar={false} navigation={navigation} />
             {/* App Bar */}
+            <AppBar showSearchBar={false} navigation={navigation} />
+
+            <Spinner
+                color={colors.primary}
+                visible={loading}
+                textContent={'Loading...'}
+                textStyle={{ color: colors.primary, marginTop: -RFPercentage(5) }}
+            />
 
             <ScrollView>
                 <View style={{ marginTop: RFPercentage(4), width: "90%", marginLeft: "5%", alignItems: "center" }} >

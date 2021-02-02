@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { TouchableOpacity, Text, TextInput, StyleSheet, View, Image, ScrollView } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, View, Image } from 'react-native';
 import { Picker } from '@react-native-community/picker';
 import { RFPercentage } from 'react-native-responsive-fontsize';
 import Spinner from 'react-native-loading-spinner-overlay';
+import { useToastBannerToggler } from 'react-native-toast-banner';
 
 import TesseractLangs from "../assets/languages/tessRactLanguages"
 import AppBar from '../component/AppBar';
 import colors from '../config/colors';
 import { scanText } from '../http/api/api';
 import { saveTextFile } from '../component/SaveFile';
+import { bannerConfig } from '../component/banner';
 
 function OCRScreen(props) {
     const [image, setImage] = useState({ uri: null })
     const [currentLanguage, setCurrentLanguage] = useState()
     const [loading, setLoading] = useState(false);
     const [count, setCount] = useState(1);
+    const { showBanner, hideBanner } = useToastBannerToggler();
 
     useEffect(() => {
         let latestImage = props.route.params.data;
@@ -43,9 +46,8 @@ function OCRScreen(props) {
         } catch (error) {
             setLoading(false);
             console.log("Error: ", error)
+            showBanner(bannerConfig(hideBanner, "Image scanning error, image size is too big try smaller image"))
         }
-
-
     }
 
     return (

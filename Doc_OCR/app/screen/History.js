@@ -3,24 +3,30 @@ import { ScrollView } from 'react-native';
 import { StyleSheet, View } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { RFPercentage } from 'react-native-responsive-fontsize';
+import { Image } from 'react-native';
 
 import colors from '../config/colors';
-import SwipeCards from '../component/SwipeCards';
 import { readTextFile, updateTextFile } from '../component/SaveFile';
 import Card from '../component/Card';
+import { Text } from 'react-native';
+const noDoc = require("../../assets/noDoc.png")
 
 function History(props) {
 
-    const [data, setData] = useState([])
+    const [data, setData] = useState([false])
     const [render, setRender] = useState(false)
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        if (data.length === 0) {
+        if (data[0] === false) {
             readData = async () => {
                 setLoading(true)
                 let data = await readTextFile();
-                setData(data)
+                if (data === undefined) {
+                    setData([true])
+                } else {
+                    setData(data)
+                }
                 setLoading(false)
             }
             readData()
@@ -28,18 +34,32 @@ function History(props) {
 
         setTimeout(getText = async () => {
             const data = await readTextFile();
-            setData(data)
+            if (data === undefined) {
+                setData([true])
+            } else {
+                setData(data)
+            }
             setLoading(false)
         }, 5000)
     })
 
 
-    const handleHistory = async (id) => {
+    const handleDeleteHistory = async (id) => {
         let oldData = data;
         oldData.splice(id, 1)
-        setData(oldData)
+
+        if (oldData.length === 0) {
+            setData([true])
+        } else {
+            setData(oldData)
+        }
+
         await updateTextFile(oldData)
         setRender(!render)
+    }
+
+    const handleHistoryCard = async (text) => {
+        console.log(text)
     }
 
     return (
@@ -51,11 +71,18 @@ function History(props) {
                 textStyle={{ color: colors.primary, marginTop: -RFPercentage(5) }}
             />
 
-            <View >
-                {data.map((item, i) => (
-                    <Card key={i} onPress={handleHistory} description={item.data} date={item.date} id={i} />
-                ))}
-            </View>
+            {(data[0] === false || data[0] === true || data.length === 0) ?
+                <View style={{ marginTop: RFPercentage(2), width: "100%", justifyContent: "center", alignItems: "center" }} >
+                    <Image style={{ width: RFPercentage(22), height: RFPercentage(22) }} source={noDoc} />
+                    <Text style={{ color: "grey", marginTop: RFPercentage(2), fontSize: RFPercentage(2.2) }} >No document</Text>
+                </View>
+                :
+                <View >
+                    {data.map((item, i) => (
+                        <Card key={i} onHandleHistoryData={handleHistoryCard} onPress={handleDeleteHistory} description={item.data} date={item.date} id={i} />
+                    ))}
+                </View>
+            }
         </ScrollView>
     );
 }

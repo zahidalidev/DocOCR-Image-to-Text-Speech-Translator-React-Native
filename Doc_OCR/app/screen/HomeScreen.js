@@ -9,6 +9,10 @@ import { SafeAreaView, StyleSheet, StatusBar, View, Text, TouchableOpacity, Moda
 
 import AppBar from '../component/AppBar';
 import colors from '../config/colors';
+import History from './History';
+import { ScrollView } from 'react-native';
+import { RFPercentage } from 'react-native-responsive-fontsize';
+import { readTextFile } from '../component/SaveFile';
 
 
 class HomeScreen extends Component {
@@ -31,7 +35,11 @@ class HomeScreen extends Component {
             <View style={styles.mainContainer}>
                 <SafeAreaView style={styles.safeContainer} >
                     {/* App Bar */}
-                    <AppBar showSearchBar={true} navigation={this.props.navigation} />
+                    <AppBar showSearchBar={false} navigation={this.props.navigation} />
+
+                    <ScrollView style={{ width: "100%", marginTop: RFPercentage(3) }} >
+                        <History />
+                    </ScrollView>
 
                     {/* bottom circle btton*/}
                     <View style={styles.bottomBarContainer} >
@@ -89,7 +97,10 @@ class HomeScreen extends Component {
                                     <View style={styles.circleContainerRight} >
                                         <TouchableOpacity
                                             style={[styles.circleButtonSmall, styles.shadowEffect]}
-                                            onPress={() => this.setModalVisible(false)}
+                                            onPress={() => {
+                                                this.setModalVisible(false)
+                                                this.props.navigation.navigate('TranslateScreen')
+                                            }}
                                         >
                                             <IconM name={"translate"} size={30} color={colors.secondry} />
                                         </TouchableOpacity>
@@ -183,7 +194,17 @@ const styles = StyleSheet.create({
         flex: 3,
         flexDirection: 'column-reverse',
         alignItems: 'center',
-        marginBottom: 40
+        justifyContent: "center",
+        alignSelf: "center",
+        bottom: RFPercentage(5),
+        position: 'absolute',
+
+
+        // flex: 3,
+        // flexDirection: 'column-reverse',
+        // alignItems: 'center',
+        // marginBottom: RFPercentage(5),
+        // minHeight: RFPercentage(13)
     },
 
     circleContainer: {

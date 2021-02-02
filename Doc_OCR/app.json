@@ -23,7 +23,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.kiloo.subwaysurf"
     },
     "web": {
       "favicon": "./assets/favicon.png"

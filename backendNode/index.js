@@ -17,4 +17,3 @@ require('./startup/routes')(app)
 app.listen(app.get('port'), function () {
     console.log(`Listing on port ${app.get('port')}...`)
 })
-

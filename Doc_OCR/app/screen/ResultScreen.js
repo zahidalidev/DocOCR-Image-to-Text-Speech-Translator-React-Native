@@ -7,6 +7,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import * as Speech from 'expo-speech';
 
+
 import AppBar from '../component/AppBar';
 import colors from '../config/colors';
 import SpeechLangs from "../assets/languages/speechLanguages"
@@ -16,37 +17,21 @@ import { getTranslatedText, scanText } from '../http/api/api';
 function ResultScreen(props) {
 
     const [text, setText] = useState('')
-    const [translatedText, setTranslatedText] = useState('')
+    const [translatedText, setTranslatedText] = useState('h')
     const [currentLanguage, setCurrentLanguage] = useState()
-    const [image, setImage] = useState({ uri: '' })
     const [loading, setLoading] = useState(false);
+    const [count, setCount] = useState(0);
+
 
     useEffect(() => {
-        async function fetchData() {
-            let latestImage = props.route.params.data;
-            let lang = props.route.params.lang;
+        let latestText = props.route.params.data;
+        let latestCount = props.route.params.count;
 
-            if (latestImage.uri != image.uri) {
-                setImage(latestImage)
-
-                let data = new FormData();
-                data.append('file', { uri: latestImage.uri, name: 'file', type: "image/jpg" });
-
-                try {
-                    setLoading(true);
-                    const { data: text } = await scanText(data, lang)
-                    setText(text);
-
-                    setLoading(false);
-                } catch (error) {
-                    setLoading(false);
-                    console.log("Error: ", error)
-                }
-            }
-
+        if (latestCount != count) {
+            setText(latestText)
+            setTranslatedText('')
+            setCount(latestCount)
         }
-        fetchData();
-
     })
 
     const handleTranslation = async (stop) => {
@@ -67,7 +52,7 @@ function ResultScreen(props) {
     }
 
     const swapText = () => {
-        let temp = text;
+        const temp = text;
         setText(translatedText)
         setTranslatedText(temp)
     }
@@ -158,7 +143,7 @@ function ResultScreen(props) {
                         textAlignVertical="top"
                         textAlign="left"
                         value={translatedText}
-                        onChangeText={(text) => setText(text)}
+                        onChangeText={(text) => setTranslatedText(text)}
                     />
 
                     <View style={{ marginTop: -RFPercentage(4), marginLeft: RFPercentage(1), flexDirection: "row", width: "100%", alignItems: "flex-end", justifyContent: "flex-end" }} >

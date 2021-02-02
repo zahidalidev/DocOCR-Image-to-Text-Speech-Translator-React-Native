@@ -9,6 +9,8 @@ app.use(express.json())
 
 app.set('port', (process.env.PORT || 5000))
 
+app.set('view engine', 'ejs');
+
 require('./startup/routes')(app)
 
 

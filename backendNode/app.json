@@ -1,0 +1,9 @@
+{
+    "name": "doc_ocr",
+    "description": "OCR app",
+    "repository": "https://github.com/zahidalidev/Image-to-Text-Speech-Translator-reactnative-expo",
+    "keywords": [
+        "node",
+        "express"
+    ]
+}

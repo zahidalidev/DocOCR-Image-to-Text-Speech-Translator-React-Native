@@ -18,6 +18,7 @@ const upload = multer({ storage })
 
 router.post('/:id', upload.single('file'), async (req, res) => {
     try {
+
         const lang = req.params.id
         const createWorker = tessaract.createWorker;
         const worker = createWorker();
@@ -29,13 +30,20 @@ router.post('/:id', upload.single('file'), async (req, res) => {
         await worker.loadLanguage(lang);
         await worker.initialize(lang)
 
-
         const { data: { text } } = await worker.recognize(req.file.path)
 
         // remove image from path "req.file.path"
         await fs.remove(req.file.path)
 
-        res.send(text)
+        // console.log('Scanned text: ', text)
+
+        res.write(text)
+        res.end()
+        // if (text) {
+        // console.log('if....')
+        // }
+
+        return;
     } catch (error) {
         res.send(error)
     }

@@ -11,11 +11,12 @@ import Card from '../component/Card';
 import { Text } from 'react-native';
 const noDoc = require("../../assets/noDoc.png")
 
-function History(props) {
+function History({ onNavigate }) {
 
     const [data, setData] = useState([false])
     const [render, setRender] = useState(false)
     const [loading, setLoading] = useState(false);
+    const [count, setCount] = useState(-2000);
 
     useEffect(() => {
         if (data[0] === false) {
@@ -59,7 +60,8 @@ function History(props) {
     }
 
     const handleHistoryCard = async (text) => {
-        console.log(text)
+        setCount(count + 1)
+        onNavigate.navigate('ResultScreen', { data: text, count: count })
     }
 
     return (

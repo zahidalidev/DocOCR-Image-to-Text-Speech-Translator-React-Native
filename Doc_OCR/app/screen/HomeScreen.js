@@ -37,7 +37,7 @@ class HomeScreen extends Component {
                     <AppBar showSearchBar={false} navigation={this.props.navigation} />
 
                     <ScrollView style={{ width: "100%", marginTop: RFPercentage(3) }} >
-                        <History />
+                        <History onNavigate={this.props.navigation} />
                     </ScrollView>
 
                     {/* bottom circle btton*/}

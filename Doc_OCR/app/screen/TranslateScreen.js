@@ -107,12 +107,17 @@ function TranslateScreen({ navigation }) {
                             onPress={() => copyContent()}
                             style={{ marginLeft: RFPercentage(-1) }}
                         />
-                        {/* <TouchableOpacity style={{ marginLeft: RFPercentage(2) }} >
-                            <MaterialCommunityIcons onPress={() => copyContent()} color="grey" name="content-copy" size={RFPercentage(3.3)} />
-                        </TouchableOpacity> */}
+                        <IconButton
+                            icon="backspace-outline"
+                            color="grey"
+                            size={RFPercentage(3.3)}
+                            onPress={() => setText('')}
+                            style={{ marginLeft: RFPercentage(-1) }}
+                        />
+
                     </View>
                 </View>
-                <View style={{ flexDirection: "row", marginTop: RFPercentage(4), width: "90%", marginLeft: "10%", alignItems: "center" }} >
+                <View style={{ flexDirection: "row", marginTop: RFPercentage(3), width: "90%", marginLeft: "10%", alignItems: "center" }} >
                     <TouchableOpacity onPress={() => swapText()} style={{ flexDirection: "row", width: "40%", alignItems: "flex-start", justifyContent: "flex-start" }} >
                         <Ionicons style={{ marginRight: -RFPercentage(1.8), marginTop: RFPercentage(1.3) }} size={30} name="arrow-down" />
                         <Ionicons size={30} name="arrow-up" />
@@ -166,10 +171,16 @@ function TranslateScreen({ navigation }) {
                             onPress={() => copyContent_2()}
                             style={{ marginLeft: RFPercentage(-1) }}
                         />
-
+                        <IconButton
+                            icon="backspace-outline"
+                            color="grey"
+                            size={RFPercentage(3.3)}
+                            onPress={() => setTranslatedText('')}
+                            style={{ marginLeft: RFPercentage(-1) }}
+                        />
                     </View>
                 </View>
-                <View style={{ marginBottom: RFPercentage(2), flexDirection: 'row', marginTop: RFPercentage(4), width: "90%", marginLeft: "5%", alignItems: "center", justifyContent: 'center' }} >
+                <View style={{ marginBottom: RFPercentage(2), flexDirection: 'row', marginTop: RFPercentage(3), width: "90%", marginLeft: "5%", alignItems: "center", justifyContent: 'center' }} >
                     <TouchableOpacity activeOpacity={0.7} onPress={() => handleTranslation()} style={{ backgroundColor: colors.primary, alignItems: "center", justifyContent: "center", borderRadius: RFPercentage(3), padding: RFPercentage(1.3), paddingLeft: RFPercentage(3), paddingRight: RFPercentage(3) }} >
                         <Text style={{ fontSize: RFPercentage(2), color: "white" }} >Translate</Text>
                     </TouchableOpacity>
@@ -196,11 +207,13 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         marginTop: RFPercentage(4),
         padding: RFPercentage(2),
-        maxHeight: RFPercentage(27),
+        maxHeight: RFPercentage(28),
     },
     textArea: {
         width: "100%",
         fontSize: RFPercentage(2.2),
+        maxHeight: RFPercentage(20),
+        height: RFPercentage(20),
         // maxHeight: RFPercentage(20),
 
         // marginBottom: RFPercentage(4)

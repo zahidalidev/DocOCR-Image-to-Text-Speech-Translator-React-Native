@@ -127,7 +127,7 @@ function ResultScreen(props) {
                         onChangeText={(text) => setText(text)}
                     />
 
-                    <View style={{ flexDirection: "row", width: "100%", marginLeft: -RFPercentage(1.5), marginTop: -RFPercentage(1) }} >
+                    <View style={{ marginTop: -RFPercentage(0.3), flexDirection: "row", width: "100%", marginLeft: -RFPercentage(1.5) }} >
                         <IconButton
                             icon="content-paste"
                             color="grey"
@@ -141,10 +141,17 @@ function ResultScreen(props) {
                             onPress={() => copyContent()}
                             style={{ marginLeft: RFPercentage(-1) }}
                         />
+                        <IconButton
+                            icon="backspace-outline"
+                            color="grey"
+                            size={RFPercentage(3.3)}
+                            onPress={() => setText('')}
+                            style={{ marginLeft: RFPercentage(-1) }}
+                        />
 
                     </View>
                 </View>
-                <View style={{ flexDirection: "row", marginTop: RFPercentage(4), width: "90%", marginLeft: "10%", alignItems: "center" }} >
+                <View style={{ flexDirection: "row", marginTop: RFPercentage(3), width: "90%", marginLeft: "10%", alignItems: "center" }} >
                     <TouchableOpacity onPress={() => swapText()} style={{ flexDirection: "row", width: "40%", alignItems: "flex-start", justifyContent: "flex-start" }} >
                         <Ionicons style={{ marginRight: -RFPercentage(1.8), marginTop: RFPercentage(1.3) }} size={30} name="arrow-down" />
                         <Ionicons size={30} name="arrow-up" />
@@ -183,7 +190,7 @@ function ResultScreen(props) {
                         onChangeText={(text) => setTranslatedText(text)}
                     />
 
-                    <View style={{ marginTop: -RFPercentage(1), marginLeft: RFPercentage(1), flexDirection: "row", width: "100%", alignItems: "flex-end", justifyContent: "flex-end" }} >
+                    <View style={{ marginTop: -RFPercentage(0.5), marginLeft: RFPercentage(1), flexDirection: "row", width: "100%", alignItems: "flex-end", justifyContent: "flex-end" }} >
                         <View style={{ flexDirection: "row", width: "75%", marginLeft: -RFPercentage(1.5) }} >
                             <IconButton
                                 icon="content-paste"
@@ -198,6 +205,13 @@ function ResultScreen(props) {
                                 onPress={() => copyContent_2()}
                                 style={{ marginLeft: RFPercentage(-1) }}
                             />
+                            <IconButton
+                                icon="backspace-outline"
+                                color="grey"
+                                size={RFPercentage(3.3)}
+                                onPress={() => setTranslatedText('')}
+                                style={{ marginLeft: RFPercentage(-1) }}
+                            />
                         </View>
 
                         <TouchableOpacity onPress={() => handleTextToVoice()} style={{ alignItems: "center", justifyContent: "center", borderRadius: RFPercentage(3), padding: RFPercentage(1.3) }} >
@@ -209,7 +223,7 @@ function ResultScreen(props) {
                     </View>
 
                 </View>
-                <View style={{ marginBottom: RFPercentage(2), flexDirection: 'row', marginTop: RFPercentage(4), width: "90%", marginLeft: "5%", alignItems: "center", justifyContent: 'center' }} >
+                <View style={{ marginBottom: RFPercentage(2), flexDirection: 'row', marginTop: RFPercentage(3), width: "90%", marginLeft: "5%", alignItems: "center", justifyContent: 'center' }} >
                     <TouchableOpacity activeOpacity={0.7} onPress={() => props.navigation.navigate('Home')} style={{ marginRight: RFPercentage(2), backgroundColor: "#af3d3d", alignItems: "center", justifyContent: "center", borderRadius: RFPercentage(3), padding: RFPercentage(1.3), paddingLeft: RFPercentage(3), paddingRight: RFPercentage(3) }} >
                         <Text style={{ fontSize: RFPercentage(2), color: "white" }} >Back</Text>
                     </TouchableOpacity>
@@ -240,10 +254,12 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         marginTop: RFPercentage(4),
         padding: RFPercentage(2),
-        maxHeight: RFPercentage(26.5),
+        maxHeight: RFPercentage(28),
     },
     textArea: {
         width: "100%",
+        maxHeight: RFPercentage(20),
+        height: RFPercentage(20),
         fontSize: RFPercentage(2.2)
     }
 })

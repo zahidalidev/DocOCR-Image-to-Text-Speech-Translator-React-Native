@@ -123,7 +123,7 @@ const AppBar = ({ navigation, showSearchBar }) => {
                                         <Text style={{ marginLeft: 20, marginTop: RFPercentage(0.4) }} >Share</Text>
                                     </View>
                                 </TouchableOpacity>
-                                <Text style={{ color: colors.mediumLightGray, paddingTop: 10 }} >App version 1.0.0</Text>
+                                <Text style={{ color: colors.mediumLightGray, paddingTop: 10 }} >App version 1.0.3</Text>
                             </View>
                         </View>
                     </View>

@@ -42,7 +42,6 @@ function OCRScreen(props) {
 
             props.navigation.navigate('ResultScreen', { data: text, count: count })
 
-
         } catch (error) {
             setLoading(false);
             console.log("Error: ", error)

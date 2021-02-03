@@ -4,7 +4,6 @@ import { RFPercentage } from 'react-native-responsive-fontsize';
 import { Ionicons } from "@expo/vector-icons"
 import { Picker } from '@react-native-community/picker';
 import Spinner from 'react-native-loading-spinner-overlay';
-import { MaterialCommunityIcons } from "@expo/vector-icons"
 import { ScrollView } from 'react-native';
 import Clipboard from "expo-clipboard"
 import { IconButton } from 'react-native-paper';

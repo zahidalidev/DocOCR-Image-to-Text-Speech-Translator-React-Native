@@ -6,6 +6,8 @@ import { Picker } from '@react-native-community/picker';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import * as Speech from 'expo-speech';
+import { IconButton } from 'react-native-paper';
+import Clipboard from "expo-clipboard"
 
 
 import AppBar from '../component/AppBar';
@@ -72,6 +74,24 @@ function ResultScreen(props) {
 
     }
 
+    const pasteContent = async () => {
+        const res = await Clipboard.getStringAsync();
+        setText(res)
+    }
+
+    const copyContent = () => {
+        Clipboard.setString(text)
+    }
+
+    const pasteContent_2 = async () => {
+        const res = await Clipboard.getStringAsync();
+        setTranslatedText(res)
+    }
+
+    const copyContent_2 = () => {
+        Clipboard.setString(translatedText)
+    }
+
     return (
         <View style={styles.mainContainer}>
             <AppBar showSearchBar={false} navigation={props.navigation} />
@@ -99,13 +119,30 @@ function ResultScreen(props) {
                         underlineColorAndroid="transparent"
                         placeholder="Type something"
                         placeholderTextColor="grey"
-                        numberOfLines={10}
+                        numberOfLines={9}
                         multiline={true}
                         textAlignVertical="top"
                         textAlign="left"
                         value={text}
                         onChangeText={(text) => setText(text)}
                     />
+
+                    <View style={{ flexDirection: "row", width: "100%", marginLeft: -RFPercentage(1.5), marginTop: -RFPercentage(1) }} >
+                        <IconButton
+                            icon="content-paste"
+                            color="grey"
+                            size={RFPercentage(3.3)}
+                            onPress={() => pasteContent()}
+                        />
+                        <IconButton
+                            icon="content-copy"
+                            color="grey"
+                            size={RFPercentage(3.3)}
+                            onPress={() => copyContent()}
+                            style={{ marginLeft: RFPercentage(-1) }}
+                        />
+
+                    </View>
                 </View>
                 <View style={{ flexDirection: "row", marginTop: RFPercentage(4), width: "90%", marginLeft: "10%", alignItems: "center" }} >
                     <TouchableOpacity onPress={() => swapText()} style={{ flexDirection: "row", width: "40%", alignItems: "flex-start", justifyContent: "flex-start" }} >
@@ -138,7 +175,7 @@ function ResultScreen(props) {
                         underlineColorAndroid="transparent"
                         placeholder="Translated Text"
                         placeholderTextColor="grey"
-                        numberOfLines={10}
+                        numberOfLines={9}
                         multiline={true}
                         textAlignVertical="top"
                         textAlign="left"
@@ -146,7 +183,23 @@ function ResultScreen(props) {
                         onChangeText={(text) => setTranslatedText(text)}
                     />
 
-                    <View style={{ marginTop: -RFPercentage(4), marginLeft: RFPercentage(1), flexDirection: "row", width: "100%", alignItems: "flex-end", justifyContent: "flex-end" }} >
+                    <View style={{ marginTop: -RFPercentage(1), marginLeft: RFPercentage(1), flexDirection: "row", width: "100%", alignItems: "flex-end", justifyContent: "flex-end" }} >
+                        <View style={{ flexDirection: "row", width: "75%", marginLeft: -RFPercentage(1.5) }} >
+                            <IconButton
+                                icon="content-paste"
+                                color="grey"
+                                size={RFPercentage(3.3)}
+                                onPress={() => pasteContent_2()}
+                            />
+                            <IconButton
+                                icon="content-copy"
+                                color="grey"
+                                size={RFPercentage(3.3)}
+                                onPress={() => copyContent_2()}
+                                style={{ marginLeft: RFPercentage(-1) }}
+                            />
+                        </View>
+
                         <TouchableOpacity onPress={() => handleTextToVoice()} style={{ alignItems: "center", justifyContent: "center", borderRadius: RFPercentage(3), padding: RFPercentage(1.3) }} >
                             <MaterialCommunityIcons name={"volume-high"} size={30} color={colors.primary} />
                         </TouchableOpacity>
@@ -187,7 +240,7 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         marginTop: RFPercentage(4),
         padding: RFPercentage(2),
-        maxHeight: RFPercentage(26),
+        maxHeight: RFPercentage(26.5),
     },
     textArea: {
         width: "100%",

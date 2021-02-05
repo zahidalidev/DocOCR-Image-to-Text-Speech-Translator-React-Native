@@ -104,8 +104,7 @@ class App extends Component {
   }
 
   componentDidMount = async () => {
-    const available = await isAvailableAsync()
-    console.log("avaiable: ", available)
+    // const available = await isAvailableAsync()
     // await setTestDeviceIDAsync('EMULATOR')
     await AdMobInterstitial.setAdUnitID(anterstitialIdHome); //test
     await AdMobInterstitial.requestAdAsync({ servePersonalizedAds: true });

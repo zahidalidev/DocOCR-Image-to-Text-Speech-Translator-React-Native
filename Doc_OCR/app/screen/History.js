@@ -43,8 +43,8 @@ function History({ onNavigate }) {
                 setData(data)
             }
             setLoading(false)
-        }, 4000)
-    }, [1000])
+        }, 5000)
+    })
 
 
     const handleDeleteHistory = async (id) => {

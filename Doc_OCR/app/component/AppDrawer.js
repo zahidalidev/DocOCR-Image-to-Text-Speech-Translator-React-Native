@@ -3,6 +3,7 @@ import { Text, View } from "native-base";
 import { Button, Divider, Drawer } from "react-native-paper";
 import { Image, StyleSheet, Share } from "react-native";
 import * as StoreReview from 'expo-store-review';
+import { RFPercentage } from "react-native-responsive-fontsize";
 
 function AppDrawer({ navigation }) {
     const [active, setActive] = React.useState('');
@@ -24,8 +25,8 @@ function AppDrawer({ navigation }) {
 
     return (
         <Drawer.Section  >
-            <View style={{ flexDirection: 'row', padding: 20, marginTop: 25 }} >
-                <Image style={{ width: 260, height: 50 }} source={require("../assets/navigationIcon.png")} />
+            <View style={{ flexDirection: 'row', padding: RFPercentage(2.4), marginTop: RFPercentage(3) }} >
+                <Image style={{ width: RFPercentage(31.5), height: RFPercentage(6.2) }} source={require("../assets/navigationIcon.png")} />
             </View>
             <Divider />
             <Drawer.Item
@@ -92,7 +93,7 @@ const styles = StyleSheet.create({
     container: {
         position: "absolute",
         justifyContent: "flex-start",
-        paddingVertical: 20,
+        paddingVertical: RFPercentage(2.4),
 
     }
 })

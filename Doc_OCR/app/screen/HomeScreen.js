@@ -48,7 +48,7 @@ class HomeScreen extends Component {
                                 style={[styles.circleButton, styles.shadowEffect]}
                                 onPress={() => this.setModalVisible(true)}
                             >
-                                <Icon name={modalVisible ? "times" : "plus"} size={30} color={colors.primary} />
+                                <Icon name={modalVisible ? "times" : "plus"} size={RFPercentage(3.4)} color={colors.primary} />
                             </TouchableOpacity>
 
                         </View>
@@ -77,7 +77,7 @@ class HomeScreen extends Component {
                                                 this.props.navigation.navigate('TextToVoice')
                                             }}
                                         >
-                                            <IconM name={"volume-high"} size={30} color={colors.secondry} />
+                                            <IconM name={"volume-high"} size={RFPercentage(4)} color={colors.secondry} />
                                         </TouchableOpacity>
 
                                     </View>
@@ -89,7 +89,7 @@ class HomeScreen extends Component {
                                                 this.setModalVisible(false)
                                             }}
                                         >
-                                            <Icon name={"camera"} size={30} color={colors.secondry} />
+                                            <Icon name={"camera"} size={RFPercentage(3.5)} color={colors.secondry} />
                                         </TouchableOpacity>
 
                                     </View>
@@ -101,7 +101,7 @@ class HomeScreen extends Component {
                                                 this.props.navigation.navigate('TranslateScreen')
                                             }}
                                         >
-                                            <IconM name={"translate"} size={30} color={colors.secondry} />
+                                            <IconM name={"translate"} size={RFPercentage(3.5)} color={colors.secondry} />
                                         </TouchableOpacity>
 
                                     </View>
@@ -125,7 +125,7 @@ class HomeScreen extends Component {
 
                                     <View style={styles.cardContainer} >
                                         <ListItem >
-                                            <IconF name="camera" size={30} />
+                                            <IconF name="camera" size={RFPercentage(3.2)} />
                                             <Text style={styles.listHeading} >Choose what action to take</Text>
                                         </ListItem>
 
@@ -138,13 +138,13 @@ class HomeScreen extends Component {
                                                 this.props.onGetImg('camera', this.props.navigation)
                                             }}
                                         >
-                                            <View style={{ flexDirection: "row", padding: 15 }} >
-                                                <Icon name={"camera"} size={20} color={colors.primary} />
-                                                <Text style={{ marginLeft: 15 }} >Camera</Text>
+                                            <View style={{ flexDirection: "row", padding: RFPercentage(1.8) }} >
+                                                <Icon name={"camera"} size={RFPercentage(2.4)} color={colors.primary} />
+                                                <Text style={{ marginLeft: RFPercentage(1.8) }} >Camera</Text>
                                             </View>
                                         </TouchableOpacity>
 
-                                        <Divider style={{ height: 1, backgroundColor: colors.lightGray, width: 130 }} />
+                                        <Divider style={{ height: 1, backgroundColor: colors.lightGray, width: RFPercentage(18) }} />
 
                                         <TouchableOpacity
                                             onPress={() => {
@@ -153,9 +153,9 @@ class HomeScreen extends Component {
                                                 this.props.onGetImg('gallery', this.props.navigation)
                                             }}
                                         >
-                                            <View style={{ flexDirection: "row", padding: 15 }} >
-                                                <IconE name={"images"} size={20} color={colors.primary} />
-                                                <Text style={{ marginLeft: 15 }} >Gallery</Text>
+                                            <View style={{ flexDirection: "row", padding: RFPercentage(1.8) }} >
+                                                <IconE name={"images"} size={RFPercentage(2.4)} color={colors.primary} />
+                                                <Text style={{ marginLeft: RFPercentage(1.8) }} >Gallery</Text>
                                             </View>
                                         </TouchableOpacity>
 
@@ -215,10 +215,10 @@ const styles = StyleSheet.create({
         borderColor: 'rgba(0, 0, 0, 0.2)',
         alignItems: 'center',
         justifyContent: 'center',
-        width: 90,
-        height: 90,
+        width: RFPercentage(11),
+        height: RFPercentage(11),
         backgroundColor: '#fff',
-        borderRadius: 50,
+        borderRadius: RFPercentage(5.5),
     },
 
 
@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "flex-end",
         alignItems: "center",
-        marginBottom: 230
+        marginBottom: RFPercentage(29)
     },
 
     bottomCenterPopup: {
@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "flex-end",
-        marginBottom: 200
+        marginBottom: RFPercentage(25)
     },
 
     circleButtonSmall: {
@@ -242,14 +242,14 @@ const styles = StyleSheet.create({
         borderColor: 'rgba(0, 0, 0, 0.2)',
         alignItems: 'center',
         justifyContent: 'center',
-        width: 80,
-        height: 80,
+        width: RFPercentage(10),
+        height: RFPercentage(10),
         backgroundColor: '#fff',
-        borderRadius: 50,
+        borderRadius: RFPercentage(5),
     },
 
     circleContainerLeft: {
-        marginBottom: -40
+        marginBottom: -RFPercentage(5)
     },
 
     circleContainerCenter: {
@@ -257,20 +257,20 @@ const styles = StyleSheet.create({
     },
 
     circleContainerRight: {
-        marginBottom: -40
+        marginBottom: -RFPercentage(5)
     },
 
     cardContainer: {
-        width: 300,
-        height: 165,
+        width: RFPercentage(37.5),
+        height: RFPercentage(20.6),
         alignItems: "center",
         backgroundColor: colors.white
     },
 
     listHeading: {
-        fontSize: 20,
+        fontSize: RFPercentage(2.5),
         fontWeight: "600",
-        marginLeft: 10
+        marginLeft: RFPercentage(1.25)
     },
 
     shadowEffect: {

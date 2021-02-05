@@ -30,13 +30,6 @@ function TextToVoice({ navigation }) {
         Speech.stop()
 
     }
-    // const pauseSpeech = () => {
-    //     Speech.pause()
-    // }
-    // const resumeSpeech = () => {
-    //     Speech.resume()
-    // }
-
 
     return (
         <View style={styles.mainContainer}>
@@ -90,12 +83,6 @@ function TextToVoice({ navigation }) {
                 <TouchableOpacity onPress={() => stopSpeech()} style={{ marginLeft: RFPercentage(2), alignItems: "center", justifyContent: "center", borderRadius: RFPercentage(3), padding: RFPercentage(1.3) }} >
                     <MaterialCommunityIcons name={"volume-off"} size={35} color={colors.primary} />
                 </TouchableOpacity>
-                {/* <TouchableOpacity onPress={() => pauseSpeech()} style={{ marginLeft: RFPercentage(2), alignItems: "center", justifyContent: "center", borderRadius: RFPercentage(3), padding: RFPercentage(1.3) }} >
-                    <MaterialCommunityIcons name={"pause-circle"} size={30} color={colors.primary} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => resumeSpeech()} style={{ marginLeft: RFPercentage(2), alignItems: "center", justifyContent: "center", borderRadius: RFPercentage(3), padding: RFPercentage(1.3) }} >
-                    <MaterialCommunityIcons name={"play-circle"} size={30} color={colors.primary} />
-                </TouchableOpacity> */}
             </View>
 
         </View>
@@ -109,7 +96,6 @@ const styles = StyleSheet.create({
     },
 
     textAreaContainer: {
-        // flex: 1,
         width: "90%",
         marginLeft: "5%",
         justifyContent: "flex-start",

@@ -17,7 +17,10 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-3883602119077591~4547519401"
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -25,7 +28,10 @@
         "backgroundColor": "#FFFFFF"
       },
       "playStoreUrl": "https://play.google.com/store/apps/details?id=com.kiloo.subwaysurf",
-      "package": "com.zahidalidev.DocOCR"
+      "package": "com.zahidalidev.DocOCR",
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-3883602119077591~7062179711"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"

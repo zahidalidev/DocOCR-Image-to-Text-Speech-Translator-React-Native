@@ -9,14 +9,10 @@
 import React, { useEffect } from 'react';
 import { Component } from 'react';
 import {
-  SafeAreaView,
-  StyleSheet,
-  StatusBar,
+  Platform
 } from 'react-native';
-import { Provider as PaperProvider } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { useWindowDimensions } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import {
@@ -31,13 +27,19 @@ import OCRScreen from './app/screen/OCRScreen';
 import ResultScreen from './app/screen/ResultScreen';
 import colors from './app/config/colors';
 import TextToVoice from './app/screen/TextToVoice';
+import { AdMobInterstitial, setTestDeviceIDAsync, isAvailableAsync } from "expo-ads-admob"
+import { anterstitialIdHome } from './app/config/AdIds';
 
 const Stack = createDrawerNavigator();
 
 
+//interstitial: ca-app-pub-3883602119077591/7824597044
+//history screen banner: ca-app-pub-3883602119077591/3119065274
+
 class App extends Component {
   state = {
     image: null,
+    interstitialAdId: "ca-app-pub-3883602119077591/7824597044"
   }
 
 
@@ -99,6 +101,17 @@ class App extends Component {
       this.imagePickerBody(pickerResult, navigation)
     }
 
+  }
+
+  componentDidMount = async () => {
+    const available = await isAvailableAsync()
+    console.log("avaiable: ", available)
+    // await setTestDeviceIDAsync('EMULATOR')
+    await AdMobInterstitial.setAdUnitID(anterstitialIdHome); //test
+    await AdMobInterstitial.requestAdAsync({ servePersonalizedAds: true });
+    await AdMobInterstitial.showAdAsync()
+
+    console.log(Platform)
   }
 
   render() {

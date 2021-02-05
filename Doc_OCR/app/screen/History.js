@@ -4,11 +4,13 @@ import { StyleSheet, View } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { RFPercentage } from 'react-native-responsive-fontsize';
 import { Image } from 'react-native';
+import { AdMobBanner } from "expo-ads-admob";
 
 import colors from '../config/colors';
 import { readTextFile, updateTextFile } from '../component/SaveFile';
 import Card from '../component/Card';
 import { Text } from 'react-native';
+import { banner1History } from '../config/AdIds';
 const noDoc = require("../../assets/noDoc.png")
 
 function History({ onNavigate }) {
@@ -41,8 +43,8 @@ function History({ onNavigate }) {
                 setData(data)
             }
             setLoading(false)
-        }, 5000)
-    })
+        }, 4000)
+    }, [1000])
 
 
     const handleDeleteHistory = async (id) => {
@@ -63,6 +65,10 @@ function History({ onNavigate }) {
         setCount(count + 1)
         onNavigate.navigate('ResultScreen', { data: text, count: count })
     }
+    const bannerError = () => {
+        console.log("An error");
+        return;
+    }
 
     return (
         <ScrollView style={{ width: "100%" }} >
@@ -74,12 +80,33 @@ function History({ onNavigate }) {
             />
 
             {(data[0] === false || data[0] === true || data.length === 0) ?
-                <View style={{ marginTop: RFPercentage(2), width: "100%", justifyContent: "center", alignItems: "center" }} >
-                    <Image style={{ width: RFPercentage(22), height: RFPercentage(22) }} source={noDoc} />
-                    <Text style={{ color: "grey", marginTop: RFPercentage(2), fontSize: RFPercentage(2.2) }} >No document</Text>
+                <View style={{ flex: 1, width: "100%", justifyContent: "center", alignItems: "center" }} >
+                    <View style={{ marginTop: RFPercentage(1), width: "100%", justifyContent: "center", alignItems: "center" }} >
+                        <AdMobBanner
+                            bannerSize="largeBanner"
+                            adUnitID={banner1History}  //test Ad
+                            servePersonalizedAds
+                            didFailToReceiveAdWithError={() => bannerError()}
+
+                        />
+                    </View>
+
+                    <View style={{ marginTop: RFPercentage(2), width: "100%", justifyContent: "center", alignItems: "center" }} >
+                        <Image style={{ width: RFPercentage(22), height: RFPercentage(22) }} source={noDoc} />
+                        <Text style={{ color: "grey", marginTop: RFPercentage(2), fontSize: RFPercentage(2.2) }} >No document</Text>
+                    </View>
                 </View>
                 :
                 <View >
+                    <View style={{ width: "100%", justifyContent: "center", alignItems: "center" }} >
+                        <AdMobBanner
+                            bannerSize="largeBanner"
+                            adUnitID={banner1History}  //test Ad
+                            servePersonalizedAds
+                            didFailToReceiveAdWithError={() => bannerError()}
+
+                        />
+                    </View>
                     {data.map((item, i) => (
                         <Card key={i} onHandleHistoryData={handleHistoryCard} onPress={handleDeleteHistory} description={item.data} date={item.date} id={i} />
                     ))}

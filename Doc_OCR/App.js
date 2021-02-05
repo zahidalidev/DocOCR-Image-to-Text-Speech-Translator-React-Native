@@ -110,7 +110,7 @@ class App extends Component {
     await AdMobInterstitial.requestAdAsync({ servePersonalizedAds: true });
     await AdMobInterstitial.showAdAsync()
 
-    console.log(Platform)
+    // console.log(Platform)
   }
 
   render() {

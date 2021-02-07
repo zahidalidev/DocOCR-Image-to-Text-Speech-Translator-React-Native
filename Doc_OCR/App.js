@@ -43,25 +43,25 @@ class App extends Component {
   }
 
 
-  getPermissionAsync = async () => {
-    // Camera roll Permission 
-    if (Platform.OS === 'ios') {
-      const { status } = await Permissions.askAsync(Permissions.MEDIA_LIBRARY());
-      if (status !== 'granted') {
-        alert('Sorry, we need camera roll permissions to make this work!');
-      }
-    }
-    // Camera Permission
-    const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    this.setState({ hasPermission: status === 'granted' });
-  }
+  // getPermissionAsync = async () => {
+  //   // Camera roll Permission 
+  //   if (Platform.OS === 'ios') {
+  //     const { status } = await Permissions.askAsync(Permissions.MEDIA_LIBRARY());
+  //     if (status !== 'granted') {
+  //       alert('Sorry, we need camera roll permissions to make this work!');
+  //     }
+  //   }
+  //   // Camera Permission
+  //   const { status } = await Permissions.askAsync(Permissions.CAMERA);
+  //   this.setState({ hasPermission: status === 'granted' });
+  // }
 
 
-  imagePickerBody = (response, navigation) => {
+  imagePickerBody = async (response, navigation) => {
     // Same code as in above section!
     if (response.cancelled) {
       console.log('User cancelled image picker');
-      this.props.navigation.navigate('Home')
+      navigation.navigate('Home')
     }
     else if (response.error) {
       console.log('Image Picker Error: ', response.error);
@@ -76,7 +76,11 @@ class App extends Component {
   }
 
   getImg = async (selection, navigation) => {
-    this.getPermissionAsync()
+    // this.getPermissionAsync()
+
+    const options = {
+      allowsEditing: true,
+    }
 
     if (selection === "camera") {
       let permissionResult = await ImagePicker.requestCameraPermissionsAsync();
@@ -86,8 +90,10 @@ class App extends Component {
         return;
       }
 
-      let pickerResult = await ImagePicker.launchCameraAsync();
-      this.imagePickerBody(pickerResult, navigation)
+
+      let pickerResult = await ImagePicker.launchCameraAsync(options);
+
+      await this.imagePickerBody(pickerResult, navigation)
 
     } else {
       let permissionResult = await ImagePicker.getMediaLibraryPermissionsAsync();
@@ -97,7 +103,9 @@ class App extends Component {
         return;
       }
 
-      let pickerResult = await ImagePicker.launchImageLibraryAsync();
+      let pickerResult = await ImagePicker.launchImageLibraryAsync(options);
+      console.log("lib: ", pickerResult)
+
       this.imagePickerBody(pickerResult, navigation)
     }
 

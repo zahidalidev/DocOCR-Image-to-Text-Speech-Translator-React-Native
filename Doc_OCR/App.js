@@ -104,8 +104,6 @@ class App extends Component {
       }
 
       let pickerResult = await ImagePicker.launchImageLibraryAsync(options);
-      console.log("lib: ", pickerResult)
-
       this.imagePickerBody(pickerResult, navigation)
     }
 

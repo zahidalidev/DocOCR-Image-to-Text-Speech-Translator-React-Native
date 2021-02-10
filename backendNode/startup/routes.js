@@ -37,11 +37,8 @@ module.exports = (app) => {
                 }
             });
 
-
             const waitAndSend = () => {
                 setTimeout(() => {
-
-                    console.log('middle 1 timeout')
                     // If the response hasn't finished and hasn't sent any data back....
                     if (!isFinished && !isDataSent) {
                         // Need to write the status code/headers if they haven't been sent yet.
@@ -52,7 +49,7 @@ module.exports = (app) => {
                         waitAndSend();
                     }
 
-                    console.log("finished:", isFinished, isDataSent)
+                    console.log("finished: ", isFinished, isDataSent)
 
                 }, 10000);
             };

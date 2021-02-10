@@ -65,6 +65,7 @@ function History({ onNavigate }) {
         setCount(count + 1)
         onNavigate.navigate('ResultScreen', { data: text, count: count })
     }
+
     const bannerError = () => {
         console.log("An error");
         return;
